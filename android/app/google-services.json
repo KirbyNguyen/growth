@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "864223236577",
+    "project_id": "growth-duckpond",
+    "storage_bucket": "growth-duckpond.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864223236577:android:64588175c6d1beaa1302a0",
+        "android_client_info": {
+          "package_name": "com.duckpond.growth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864223236577-gknsr6ms9kg84p0ngn8tgpeui1k8tthh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYtehGFFfCbHb699vtlHoydeJL_TJ7M8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864223236577-gknsr6ms9kg84p0ngn8tgpeui1k8tthh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "864223236577-3ihr05rdhlnlb565fl3155hsgh61m11l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.duckpond.growth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
