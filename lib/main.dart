@@ -1,94 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:growth/constants/colors.dart';
-import 'package:growth/styles/app_theme.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:growth/providers/app_theme_provider.dart';
+import 'package:growth/providers/shared_preferences_provider.dart';
+import 'package:growth/pages/authentication/auth_options_page.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  runApp(ProviderScope(
+    overrides: [
+      // override the previous value with the new object
+      sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+    ],
+    child: const MyApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final _useAppTheme = useProvider(appThemeProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
     return MaterialApp(
-      title: 'Flutter Demo',
-      // theme: AppTheme.lightThemeData,
-      theme: AppTheme.darkThemeData,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  int _currentTabIndex = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _selectTab(int newIndex) {
-    if (_currentTabIndex != newIndex) {
-      setState(() {
-        _currentTabIndex = newIndex;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentTabIndex,
-        onTap: _selectTab,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favorite",
-            backgroundColor: CustomColors.primaryDark,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.unsubscribe),
-            label: "Unsubscribe",
-            backgroundColor: CustomColors.primaryDark,
-          ),
-        ],
-      ),
+      title: "Growth",
+      theme: _useAppTheme.getThemeData(context, _useAppThemeState),
+      home: const AuthOptionsPage(),
     );
   }
 }

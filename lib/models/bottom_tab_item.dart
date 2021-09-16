@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/colors.dart';
 
+
+/// Bottom Tab Item for Bottom Tab Navigation Bar.
+/// The class requires [pageName], [iconData], [page], and [isDarkMode].
 class BottomTabItem {
   final String pageName;
   final IconData iconData;

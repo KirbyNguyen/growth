@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// Custom colors for the application.
 class CustomColors {
+  static const Color gradientTopLight = Color(0xFFBDFD73);
+  static const Color gradientBotLight = Color(0xFF2E7D32);
+
+  static const Color gradientTopDark = Color(0xFF66BB6A);
+  static const Color gradientBotDark = Color(0xFF33691E);
+
   static const Color canvasLight = Color(0xFFFFFFFF);
   static const Color canvasDark = Color(0xFF2E2E2E);
 

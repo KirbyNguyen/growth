@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/colors.dart';
 
+/// App Theme class to provide [lightThemeData] or [darkThemeData].
 class AppTheme {
   final ColorScheme _lightScheme = const ColorScheme.light(
     primary: CustomColors.primaryLight,
@@ -18,7 +19,7 @@ class AppTheme {
   ColorScheme get lightScheme => _lightScheme;
   ColorScheme get darkScheme => _darkScheme;
 
-  static final ThemeData lightThemeData = ThemeData(
+  static final ThemeData _lightThemeData = ThemeData(
     fontFamily: "Poppins",
     brightness: Brightness.light,
     colorScheme: AppTheme().lightScheme,
@@ -33,7 +34,7 @@ class AppTheme {
     ),
   );
 
-  static final ThemeData darkThemeData = ThemeData(
+  static final ThemeData _darkThemeData = ThemeData(
     fontFamily: "Poppins",
     brightness: Brightness.dark,
     colorScheme: AppTheme().darkScheme,
@@ -48,7 +49,8 @@ class AppTheme {
     ),
   );
 
-  // ThemeData getThemeData(BuildContext context, bool isDarkModeEnabled) {
-  //   return isDarkModeEnabled ? _darkThemeData : _lightThemeData;
-  // }
+  /// Returns the correct [ThemeData] based on [isDarkModeEnabled].
+  ThemeData getThemeData(BuildContext context, bool isDarkModeEnabled) {
+    return isDarkModeEnabled ? _darkThemeData : _lightThemeData;
+  }
 }
