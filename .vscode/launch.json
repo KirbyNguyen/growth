@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "growth",
             "request": "launch",
@@ -19,13 +20,13 @@
             "name": "Android",
             "request": "launch",
             "type": "dart",
-            "deviceId": "android"
+            "deviceId": "sdk gphone x86"
         },
         {
             "name": "iPhone",
             "request": "launch",
             "type": "dart",
-            "deviceId": "iphone"
+            "deviceId": "emulator-5554"
         }
     ],
     "compounds": [
