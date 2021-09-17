@@ -105,6 +105,10 @@ flutter:
           weight: 200
         - asset: assets/fonts/Poppins-Light.ttf
           weight: 300
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
     - family: Righteous
       fonts:
         - asset: assets/fonts/Righteous-Regular.ttf

@@ -37,4 +37,18 @@ class AuthDecoration {
       ),
     );
   }
+
+  /// Returns the correct [BoxDecoration] based on [isDarkModeEnabled]
+  /// for the authentication container that holds three sign in buttons.
+  static BoxDecoration lowerContainer(bool isDarkModeEnabled) {
+    return BoxDecoration(
+      color: isDarkModeEnabled
+          ? CustomColors.accentDark
+          : CustomColors.accentLight,
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(80.0),
+        topRight: Radius.circular(80.0),
+      ),
+    );
+  }
 }

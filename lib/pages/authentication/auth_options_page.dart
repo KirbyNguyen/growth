@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/providers/app_theme_provider.dart';
+import 'package:growth/components/sign_in_button_list.dart';
 
 /// Authentication Options Page that includes email, google, and apple sign-in
 /// buttons.
@@ -22,21 +23,21 @@ class AuthOptionsPage extends HookWidget {
           Container(
             decoration: AuthDecoration.authGradientBackground(
                 _useAppThemeStateProvider),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.25,
-                  ),
-                ],
-              ),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                ),
+                const AuthOptionsLowerContainer(),
+              ],
             ),
           ),
           Positioned(
             child: Container(
               width: MediaQuery.of(context).size.width * 0.55,
               height: MediaQuery.of(context).size.height * 0.55,
-              decoration: AuthDecoration.logoContainer(false),
+              decoration:
+                  AuthDecoration.logoContainer(_useAppThemeStateProvider),
             ),
           ),
         ],

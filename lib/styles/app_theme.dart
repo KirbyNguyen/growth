@@ -32,6 +32,24 @@ class AppTheme {
       selectedIconTheme: IconThemeData(color: CustomColors.canvasLight),
       unselectedIconTheme: IconThemeData(color: CustomColors.canvasDark),
     ),
+    textTheme: const TextTheme(
+      headline1: TextStyle(),
+      headline2: TextStyle(),
+      headline3: TextStyle(),
+      headline4: TextStyle(),
+      headline5: TextStyle(),
+      headline6: TextStyle(),
+      subtitle1: TextStyle(),
+      subtitle2: TextStyle(),
+      bodyText1: TextStyle(
+        fontSize: 16.0,
+      ),
+      bodyText2: TextStyle(
+        fontSize: 14.0,
+      ),
+      button: TextStyle(),
+      caption: TextStyle(),
+    ),
   );
 
   static final ThemeData _darkThemeData = ThemeData(
@@ -46,6 +64,24 @@ class AppTheme {
       selectedLabelStyle: TextStyle(color: CustomColors.canvasDark),
       selectedIconTheme: IconThemeData(color: CustomColors.canvasDark),
       unselectedIconTheme: IconThemeData(color: CustomColors.canvasLight),
+    ),
+    textTheme: const TextTheme(
+      headline1: TextStyle(),
+      headline2: TextStyle(),
+      headline3: TextStyle(),
+      headline4: TextStyle(),
+      headline5: TextStyle(),
+      headline6: TextStyle(),
+      subtitle1: TextStyle(),
+      subtitle2: TextStyle(),
+      bodyText1: TextStyle(
+        fontSize: 16.0,
+      ),
+      bodyText2: TextStyle(
+        fontSize: 14.0,
+      ),
+      button: TextStyle(),
+      caption: TextStyle(),
     ),
   );
 
