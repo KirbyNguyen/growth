@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:growth/styles/auth_text_field_style.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/components/sign_up_test.dart';
+import 'package:growth/components/email_auth_form.dart';
 import 'package:growth/providers/app_theme_provider.dart';
 
+/// Authentication page for email logins.
 class EmailAuthPage extends HookWidget {
   const EmailAuthPage({Key? key}) : super(key: key);
 
@@ -51,50 +52,11 @@ class EmailAuthPage extends HookWidget {
                   ),
                   Expanded(
                     flex: 3,
-                    child: Form(
-                      key: _useEmailFormKey.value,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          TextFormField(
-                            autocorrect: false,
-                            controller: _useEmailTextController,
-                            textCapitalization: TextCapitalization.none,
-                            decoration: AuthTextFieldDecoration.authTextField(
-                                    _useAppThemeStateProvider)
-                                .copyWith(hintText: "Email"),
-                          ),
-                          Column(
-                            children: <Widget>[
-                              TextFormField(
-                                autocorrect: false,
-                                controller: _usePasswordTextController,
-                                textCapitalization: TextCapitalization.none,
-                                decoration:
-                                    AuthTextFieldDecoration.authTextField(
-                                            _useAppThemeStateProvider)
-                                        .copyWith(hintText: "Password"),
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: const Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        10.0, 5.0, 0.0, 0.0),
-                                    child: Text(
-                                      "Reset Password",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: EmailAuthForm(
+                        useEmailFormKey: _useEmailFormKey,
+                        useEmailTextController: _useEmailTextController,
+                        useAppThemeStateProvider: _useAppThemeStateProvider,
+                        usePasswordTextController: _usePasswordTextController),
                   ),
                   Flexible(
                     fit: FlexFit.loose,
@@ -105,7 +67,7 @@ class EmailAuthPage extends HookWidget {
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: ElevatedButton(
                           onPressed: () {},
-                          child: const Text("Sign In"),
+                          child: const Text("SIGN IN"),
                         ),
                       ),
                     ),
@@ -123,3 +85,5 @@ class EmailAuthPage extends HookWidget {
     );
   }
 }
+
+

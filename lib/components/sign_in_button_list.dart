@@ -64,7 +64,7 @@ class AuthOptionsLowerContainer extends HookWidget {
             const Expanded(
               flex: 1,
               child: TermsText(
-                flavorText: "By logging in, you agree with our",
+                flavorText: "By signing in, you agree with our",
               ),
             ),
           ],
