@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:growth/constants/colors.dart';
+import 'package:growth/constants/custom_colors.dart';
 
 class AuthDecoration {
   /// Returns the correct [LinearGradient] based on [isDarkModeEnabled]

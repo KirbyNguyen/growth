@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:growth/constants/colors.dart';
+import 'package:growth/constants/custom_colors.dart';
 
 
 /// Bottom Tab Item for Bottom Tab Navigation Bar.

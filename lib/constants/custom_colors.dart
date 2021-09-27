@@ -19,4 +19,7 @@ class CustomColors {
 
   static const Color errorLight = Color(0xFFB71C1C);
   static const Color errorDark = Color(0xFFEF5350);
+
+  static const Color unfocusedErrorLight = Color(0xFFD66F00);
+  static const Color unfocusedErrorDark = Color(0xFFFF8400);
 }

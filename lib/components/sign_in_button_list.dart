@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+import 'package:growth/constants/custom_colors.dart';
 import 'package:growth/components/terms_text.dart';
 import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/providers/app_theme_provider.dart';
@@ -15,8 +16,6 @@ class AuthOptionsLowerContainer extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
-    final _useAppThemeNotifierrovider =
-        useProvider(appThemeStateProvider.notifier);
 
     return Expanded(
       flex: 4,
@@ -34,23 +33,30 @@ class AuthOptionsLowerContainer extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+                  // Google Sign-in Button
                   SignInButton(
                     _useAppThemeStateProvider
                         ? Buttons.GoogleDark
                         : Buttons.Google,
-                    onPressed: () {
-                      _useAppThemeNotifierrovider.toggleAppTheme(context);
-                    },
+                    onPressed: () {},
                   ),
+                  // Apple Sign-in Button
                   SignInButton(
                     _useAppThemeStateProvider
                         ? Buttons.AppleDark
                         : Buttons.Apple,
                     onPressed: () {},
                   ),
-                  SignInButton(
-                    Buttons.Email,
-                    onPressed: () {},
+                  // Email Sign-in Button
+                  SignInButtonBuilder(
+                    text: "Sign in with Email",
+                    icon: Icons.email,
+                    backgroundColor: _useAppThemeStateProvider
+                        ? CustomColors.primaryDark
+                        : CustomColors.primaryLight,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed("/auth/email");
+                    },
                   ),
                 ],
               ),

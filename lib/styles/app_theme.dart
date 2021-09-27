@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:growth/constants/colors.dart';
+import 'package:growth/constants/custom_colors.dart';
 
 /// App Theme class to provide [lightThemeData] or [darkThemeData].
 class AppTheme {

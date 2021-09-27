@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/providers/app_theme_provider.dart';
 import 'package:growth/providers/shared_preferences_provider.dart';
-import 'package:growth/pages/authentication/auth_options_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,8 @@ class MyApp extends HookWidget {
     return MaterialApp(
       title: "Growth",
       theme: _useAppTheme.getThemeData(context, _useAppThemeState),
-      home: const AuthOptionsPage(),
+      routes: NavigatonRoutes.navRoutes,
+      initialRoute: "/auth/options",
     );
   }
 }

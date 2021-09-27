@@ -26,7 +26,9 @@ class TermsText extends StatelessWidget {
                   decoration: TextDecoration.underline,
                 ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed("/terms");
+          },
         ),
       ],
     );
