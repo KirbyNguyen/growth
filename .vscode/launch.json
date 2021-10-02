@@ -20,13 +20,13 @@
             "name": "Android",
             "request": "launch",
             "type": "dart",
-            "deviceId": "sdk gphone x86"
+            "deviceId": "emulator-5554"
         },
         {
             "name": "iPhone",
             "request": "launch",
             "type": "dart",
-            "deviceId": "emulator-5554"
+            "deviceId": "A3C4CDAF-5CE3-42F1-9F9C-3F78F91E3A2A"
         }
     ],
     "compounds": [
