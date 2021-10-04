@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:growth/styles/auth_decoration.dart';
+import 'package:growth/constants/custom_colors.dart';
 import 'package:growth/components/sign_up_test.dart';
 import 'package:growth/components/email_auth_form.dart';
+import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/providers/app_theme_provider.dart';
 
 /// Authentication page for email logins.
@@ -15,8 +16,9 @@ class EmailAuthPage extends HookWidget {
   Widget build(BuildContext context) {
     final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
 
-    final _useEmailFormKey =
+    final _useEmailAuthFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
+    final _useLoading = useState<bool>(false);
     final _useEmailTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final _usePasswordTextController =
@@ -53,7 +55,7 @@ class EmailAuthPage extends HookWidget {
                   Expanded(
                     flex: 3,
                     child: EmailAuthForm(
-                        useEmailFormKey: _useEmailFormKey,
+                        useEmailFormKey: _useEmailAuthFormKey,
                         useEmailTextController: _useEmailTextController,
                         useAppThemeStateProvider: _useAppThemeStateProvider,
                         usePasswordTextController: _usePasswordTextController),
@@ -64,10 +66,25 @@ class EmailAuthPage extends HookWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.075,
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("SIGN IN"),
+                          onPressed: () {
+                            _useLoading.value = true;
+                            if (_useEmailAuthFormKey.value.currentState!
+                                .validate()) {}
+                            _useLoading.value = false;
+                          },
+                          child: _useLoading.value
+                              ? CircularProgressIndicator(
+                                  color: _useAppThemeStateProvider
+                                      ? CustomColors.canvasLight
+                                      : CustomColors.canvasDark,
+                                )
+                              : Text(
+                                  "SIGN IN",
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
                         ),
                       ),
                     ),
@@ -85,5 +102,3 @@ class EmailAuthPage extends HookWidget {
     );
   }
 }
-
-

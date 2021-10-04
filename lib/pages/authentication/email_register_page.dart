@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:growth/constants/custom_colors.dart';
 import 'package:growth/components/terms_text.dart';
+import 'package:growth/components/email_register_form.dart';
 import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/providers/app_theme_provider.dart';
-import 'package:growth/components/email_register_form.dart';
 
 /// Authentication page for email signup.
 class EmailRegisterPage extends HookWidget {
@@ -15,8 +16,9 @@ class EmailRegisterPage extends HookWidget {
   Widget build(BuildContext context) {
     final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
 
-    final _useEmailFormKey =
+    final _useEmailRegisterFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
+    final _useLoading = useState<bool>(false);
     final _useEmailTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final _usePasswordTextController =
@@ -48,7 +50,7 @@ class EmailRegisterPage extends HookWidget {
                         horizontal: MediaQuery.of(context).size.width * 0.10,
                       ),
                       child: EmailRegisterForm(
-                          useEmailFormKey: _useEmailFormKey,
+                          useEmailFormKey: _useEmailRegisterFormKey,
                           useEmailTextController: _useEmailTextController,
                           useAppThemeStateProvider: _useAppThemeStateProvider,
                           usePasswordTextController: _usePasswordTextController,
@@ -70,8 +72,22 @@ class EmailRegisterPage extends HookWidget {
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.60,
                       child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("SIGN UP"),
+                        onPressed: () {
+                          _useLoading.value = true;
+                          if (_useEmailRegisterFormKey.value.currentState!
+                              .validate()) {}
+                          _useLoading.value = false;
+                        },
+                        child: _useLoading.value
+                            ? CircularProgressIndicator(
+                                color: _useAppThemeStateProvider
+                                    ? CustomColors.canvasLight
+                                    : CustomColors.canvasDark,
+                              )
+                            : Text(
+                                "SIGN UP",
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
                       ),
                     ),
                   ),
