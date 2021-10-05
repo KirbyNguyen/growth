@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:growth/models/custom_validator.dart';
+import 'package:growth/services/validator_service.dart';
 import 'package:growth/styles/auth_text_field_style.dart';
 
 /// [EmailRegisterForm] provides 3 text fields for email, password, and confirm
@@ -41,7 +41,7 @@ class EmailRegisterForm extends HookWidget {
             controller: _useEmailTextController,
             textCapitalization: TextCapitalization.none,
             validator: (value) {
-              return CustomValidator.validateEmail(value);
+              return ValidatorService.validateEmail(value);
             },
             decoration:
                 AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
@@ -53,7 +53,7 @@ class EmailRegisterForm extends HookWidget {
             obscureText: _usePasswordObscured.value,
             textCapitalization: TextCapitalization.none,
             validator: (value) {
-              return CustomValidator.validatePassword(value);
+              return ValidatorService.validatePassword(value);
             },
             decoration:
                 AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
@@ -74,7 +74,7 @@ class EmailRegisterForm extends HookWidget {
             obscureText: _usePasswordObscured.value,
             textCapitalization: TextCapitalization.none,
             validator: (value) {
-              return CustomValidator.validateConfirmPassword(
+              return ValidatorService.validateConfirmPassword(
                   value, _usePasswordTextController.text);
             },
             decoration:

@@ -1,4 +1,5 @@
-class CustomValidator {
+/// [ValidatorService] provides functions to validate [TextFormField].
+class ValidatorService {
   /// Examines a [String] to see if it is a valid username.
   /// Takes a [String] - username and returns a [String] - result.
   static String validateUsername(String? username) {

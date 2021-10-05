@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:growth/constants/auth_status.dart';
 import 'package:growth/constants/custom_colors.dart';
+
 import 'package:growth/components/terms_text.dart';
+import 'package:growth/components/error_dialog.dart';
 import 'package:growth/components/email_register_form.dart';
+
 import 'package:growth/styles/auth_decoration.dart';
+
 import 'package:growth/providers/app_theme_provider.dart';
+import 'package:growth/providers/firebase_auth_provider.dart';
 
 /// Authentication page for email signup.
 class EmailRegisterPage extends HookWidget {
@@ -16,15 +22,18 @@ class EmailRegisterPage extends HookWidget {
   Widget build(BuildContext context) {
     final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
 
+    final _useAuthServicesProvider = useProvider(authServicesProvider);
+
     final _useEmailRegisterFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
-    final _useLoading = useState<bool>(false);
     final _useEmailTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final _usePasswordTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final _useConfirmPasswordTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
+
+    final _useLoading = useState<bool>(false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -72,10 +81,22 @@ class EmailRegisterPage extends HookWidget {
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.60,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           _useLoading.value = true;
                           if (_useEmailRegisterFormKey.value.currentState!
-                              .validate()) {}
+                              .validate()) {
+                            AuthStatus status =
+                                await _useAuthServicesProvider.signUpWithEmail(
+                                    email: _useEmailTextController.text,
+                                    password: _usePasswordTextController.text);
+
+                            // Checks error server side
+                            if (status != AuthStatus.successful) {
+                              CustomErrorDialog errorDialog =
+                                  CustomErrorDialog(context: context);
+                              await errorDialog.showError(status);
+                            } else {}
+                          }
                           _useLoading.value = false;
                         },
                         child: _useLoading.value
