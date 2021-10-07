@@ -16,7 +16,7 @@ class BottomTabNavigators {
   static Navigator balanceNavigator(GlobalKey<NavigatorState> navigatorKey) =>
       Navigator(
         key: navigatorKey,
-        initialRoute: "/",
+        initialRoute: NavigationRoutes.blankRoute,
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           switch (settings.name) {
@@ -37,7 +37,7 @@ class BottomTabNavigators {
   static Navigator gardenNavigator(GlobalKey<NavigatorState> navigatorKey) =>
       Navigator(
         key: navigatorKey,
-        initialRoute: "/",
+        initialRoute: NavigationRoutes.blankRoute,
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           switch (settings.name) {
@@ -58,7 +58,7 @@ class BottomTabNavigators {
   static Navigator settingsNavigator(GlobalKey<NavigatorState> navigatorKey) =>
       Navigator(
         key: navigatorKey,
-        initialRoute: "/",
+        initialRoute: NavigationRoutes.blankRoute,
         onGenerateRoute: (RouteSettings settings) {
           WidgetBuilder builder;
           switch (settings.name) {
