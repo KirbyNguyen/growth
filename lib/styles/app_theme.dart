@@ -28,9 +28,8 @@ class AppTheme {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.shifting,
-      selectedLabelStyle: TextStyle(color: CustomColors.canvasLight),
-      selectedIconTheme: IconThemeData(color: CustomColors.canvasLight),
-      unselectedIconTheme: IconThemeData(color: CustomColors.canvasDark),
+      selectedItemColor: CustomColors.canvasDark,
+      unselectedItemColor: CustomColors.canvasLight,
     ),
     textTheme: const TextTheme(
       headline1: TextStyle(),
@@ -61,9 +60,8 @@ class AppTheme {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.shifting,
-      selectedLabelStyle: TextStyle(color: CustomColors.canvasDark),
-      selectedIconTheme: IconThemeData(color: CustomColors.canvasDark),
-      unselectedIconTheme: IconThemeData(color: CustomColors.canvasLight),
+      selectedItemColor: CustomColors.canvasLight,
+      unselectedItemColor: CustomColors.canvasDark,
     ),
     textTheme: const TextTheme(
       headline1: TextStyle(),
