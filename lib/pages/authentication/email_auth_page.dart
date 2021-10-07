@@ -75,7 +75,7 @@ class EmailAuthPage extends HookWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.075,
+                        height: MediaQuery.of(context).size.height * 0.09,
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: ElevatedButton(
                           onPressed: () async {
@@ -93,7 +93,10 @@ class EmailAuthPage extends HookWidget {
                                 CustomErrorDialog errorDialog =
                                     CustomErrorDialog(context: context);
                                 await errorDialog.showError(status);
-                              } else {}
+                              } else {
+                                Navigator.of(context)
+                                    .popUntil(ModalRoute.withName("/"));
+                              }
                             }
                             _useLoading.value = false;
                           },

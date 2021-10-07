@@ -28,7 +28,6 @@ class EmailAuthForm extends HookWidget {
 
     return Form(
       key: _useEmailFormKey.value,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -36,9 +35,7 @@ class EmailAuthForm extends HookWidget {
             controller: _useEmailTextController,
             textCapitalization: TextCapitalization.none,
             autocorrect: false,
-            validator: (value) {
-              return ValidatorService.validateEmail(value);
-            },
+            validator: (value) => ValidatorService.validateEmail(value),
             decoration:
                 AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
                     .copyWith(hintText: "Email"),
@@ -50,9 +47,7 @@ class EmailAuthForm extends HookWidget {
                 controller: _usePasswordTextController,
                 obscureText: _usePasswordObscured.value,
                 textCapitalization: TextCapitalization.none,
-                validator: (value) {
-                  return ValidatorService.validatePassword(value);
-                },
+                validator: (value) => ValidatorService.validatePassword(value),
                 decoration: AuthTextFieldDecoration.authTextField(
                         _useAppThemeStateProvider)
                     .copyWith(

@@ -34,7 +34,7 @@ class MyApp extends HookWidget {
       title: "Growth",
       theme: _useAppTheme.getThemeData(context, _useAppThemeState),
       routes: NavigatonRoutes.navRoutes,
-      initialRoute: "/auth/options",
+      initialRoute: "/",
     );
   }
 }

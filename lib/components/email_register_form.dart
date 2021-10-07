@@ -9,19 +9,19 @@ import 'package:growth/styles/auth_text_field_style.dart';
 class EmailRegisterForm extends HookWidget {
   const EmailRegisterForm({
     Key? key,
-    required ValueNotifier<GlobalKey<FormState>> useEmailFormKey,
+    required ValueNotifier<GlobalKey<FormState>> useEmailRegisterFormKey,
     required TextEditingController useEmailTextController,
     required bool useAppThemeStateProvider,
     required TextEditingController usePasswordTextController,
     required TextEditingController useConfirmPasswordTextController,
-  })  : _useEmailFormKey = useEmailFormKey,
+  })  : _useEmailRegisterFormKey = useEmailRegisterFormKey,
         _useEmailTextController = useEmailTextController,
         _useAppThemeStateProvider = useAppThemeStateProvider,
         _usePasswordTextController = usePasswordTextController,
         _useConfirmPasswordTextController = useConfirmPasswordTextController,
         super(key: key);
 
-  final ValueNotifier<GlobalKey<FormState>> _useEmailFormKey;
+  final ValueNotifier<GlobalKey<FormState>> _useEmailRegisterFormKey;
   final bool _useAppThemeStateProvider;
   final TextEditingController _useEmailTextController;
   final TextEditingController _usePasswordTextController;
@@ -32,7 +32,7 @@ class EmailRegisterForm extends HookWidget {
     final _usePasswordObscured = useState<bool>(true);
 
     return Form(
-      key: _useEmailFormKey.value,
+      key: _useEmailRegisterFormKey.value,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -40,9 +40,7 @@ class EmailRegisterForm extends HookWidget {
             autocorrect: false,
             controller: _useEmailTextController,
             textCapitalization: TextCapitalization.none,
-            validator: (value) {
-              return ValidatorService.validateEmail(value);
-            },
+            validator: (value) => ValidatorService.validateEmail(value),
             decoration:
                 AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
                     .copyWith(hintText: "Email"),
@@ -52,9 +50,7 @@ class EmailRegisterForm extends HookWidget {
             controller: _usePasswordTextController,
             obscureText: _usePasswordObscured.value,
             textCapitalization: TextCapitalization.none,
-            validator: (value) {
-              return ValidatorService.validatePassword(value);
-            },
+            validator: (value) => ValidatorService.validatePassword(value),
             decoration:
                 AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
                     .copyWith(

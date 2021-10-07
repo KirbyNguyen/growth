@@ -2,17 +2,17 @@
 class ValidatorService {
   /// Examines a [String] to see if it is a valid username.
   /// Takes a [String] - username and returns a [String] - result.
-  static String validateUsername(String? username) {
+  static String? validateUsername(String? username) {
     if (username!.isEmpty) {
       return "Please enter a value for 'Username'.\n";
     } else {
-      return "";
+      return null;
     }
   }
 
   /// Examine a [String] to see if it is a valid email.
   /// Takes a [String] - email and returns a [String] - result.
-  static String validateEmail(String? email) {
+  static String? validateEmail(String? email) {
     // Email expression
     RegExp regex = RegExp(r'\w+@\w+\.\w+');
     if (email!.isEmpty) {
@@ -20,13 +20,13 @@ class ValidatorService {
     } else if (!regex.hasMatch(email)) {
       return "'Email' is badly formatted.\n";
     } else {
-      return "";
+      return null;
     }
   }
 
   /// Examine a [String] to see if it is a strong password
   /// Takes a [String] - password and returns a [String] - result.
-  static String validatePassword(String? password) {
+  static String? validatePassword(String? password) {
     // Uppercase expression
     RegExp hasUpper = RegExp(r'[A-Z]');
     // Lowercase expression
@@ -57,20 +57,20 @@ class ValidatorService {
       if (!hasPunct.hasMatch(password)) error += '\t\tone special character\n';
       return error;
     } else {
-      return "";
+      return null;
     }
   }
 
   /// Examine a [String] to see if it is the same as the password [String]
   /// Takes two [String]s - confirmPassword and password and returns a [String] - result.
-  static String validateConfirmPassword(
+  static String? validateConfirmPassword(
       String? confirmPassword, String? password) {
     if (confirmPassword!.isEmpty) {
       return "Please enter a value for 'Confirm Password'.\n";
     } else if (confirmPassword.compareTo(password!) != 0) {
       return "'Confirm Password' does not match with 'Password'.\n";
     } else {
-      return "";
+      return null;
     }
   }
 }

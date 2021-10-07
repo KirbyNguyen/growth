@@ -59,7 +59,7 @@ class EmailRegisterPage extends HookWidget {
                         horizontal: MediaQuery.of(context).size.width * 0.10,
                       ),
                       child: EmailRegisterForm(
-                          useEmailFormKey: _useEmailRegisterFormKey,
+                          useEmailRegisterFormKey: _useEmailRegisterFormKey,
                           useEmailTextController: _useEmailTextController,
                           useAppThemeStateProvider: _useAppThemeStateProvider,
                           usePasswordTextController: _usePasswordTextController,
@@ -79,6 +79,7 @@ class EmailRegisterPage extends HookWidget {
                     fit: FlexFit.loose,
                     flex: 2,
                     child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.09,
                       width: MediaQuery.of(context).size.width * 0.60,
                       child: ElevatedButton(
                         onPressed: () async {
@@ -95,7 +96,10 @@ class EmailRegisterPage extends HookWidget {
                               CustomErrorDialog errorDialog =
                                   CustomErrorDialog(context: context);
                               await errorDialog.showError(status);
-                            } else {}
+                            } else {
+                              Navigator.of(context)
+                                  .popUntil(ModalRoute.withName("/"));
+                            }
                           }
                           _useLoading.value = false;
                         },
