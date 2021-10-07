@@ -33,8 +33,8 @@ class MyApp extends HookWidget {
     return MaterialApp(
       title: "Growth",
       theme: _useAppTheme.getThemeData(context, _useAppThemeState),
-      routes: NavigatonRoutes.navRoutes,
-      initialRoute: "/",
+      routes: NavigationRoutes.navRoutes,
+      initialRoute: NavigationRoutes.blankRoute,
     );
   }
 }

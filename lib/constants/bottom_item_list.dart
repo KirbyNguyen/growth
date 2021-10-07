@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:growth/models/bottom_tab_item.dart';
 
-import 'package:growth/pages/balance/balance_home_page.dart';
-import 'package:growth/pages/garden/garden_home_page.dart';
-import 'package:growth/pages/settings/settings_home_page.dart';
+import 'package:growth/constants/bottom_tab_navigators.dart';
 
-List<BottomTabItem> bottomTabList = [
-  BottomTabItem(
-    pageName: "Balance",
-    iconData: Icons.account_balance,
-    page: const BalanceHomePage(),
-  ),
-  BottomTabItem(
-    pageName: "Garden",
-    iconData: Icons.spa,
-    page: const GardenHomePage(),
-  ),
-  BottomTabItem(
-    pageName: "Settings",
-    iconData: Icons.settings,
-    page: const SettingsHomePage(),
-  ),
-];
+/// [BottomItemList] contains NavigatorState for [BottomNavigationBar] in the
+/// [HomePage].
+class BottomItemList {
+  final GlobalKey<NavigatorState> _balanceNavigatorKey =
+      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _gardenNavigatorKey =
+      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _settingsNavigatorKey =
+      GlobalKey<NavigatorState>();
+
+  /// Provides a list of [BottomTabItem].
+  List<BottomTabItem> list() => <BottomTabItem>[
+        BottomTabItem(
+          pageName: "Balance",
+          iconData: Icons.account_balance,
+          navigatorKey: _balanceNavigatorKey,
+          navigator: BottomTabNavigators.balanceNavigator(_balanceNavigatorKey),
+        ),
+        BottomTabItem(
+          pageName: "Garden",
+          iconData: Icons.spa,
+          navigatorKey: _gardenNavigatorKey,
+          navigator: BottomTabNavigators.gardenNavigator(_gardenNavigatorKey),
+        ),
+        BottomTabItem(
+          pageName: "Settings",
+          iconData: Icons.settings,
+          navigatorKey: _settingsNavigatorKey,
+          navigator:
+              BottomTabNavigators.settingsNavigator(_settingsNavigatorKey),
+        ),
+      ];
+}

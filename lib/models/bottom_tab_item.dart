@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 /// Bottom Tab Item for Bottom Tab Navigation Bar.
-/// The class requires [pageName], [iconData], [page], and [isDarkMode].
+/// The class requires [pageName], [iconData], [Navigator], and [GlobalKey]
+/// with [NavigatorState].
 class BottomTabItem {
   final String pageName;
   final IconData iconData;
-  final Widget page;
-
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final Navigator navigator;
+  final GlobalKey<NavigatorState> navigatorKey;
 
   BottomTabItem({
     required this.pageName,
     required this.iconData,
-    required this.page,
+    required this.navigator,
+    required this.navigatorKey,
   });
 }

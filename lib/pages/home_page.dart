@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:growth/constants/bottom_item_list.dart';
 import 'package:growth/constants/custom_colors.dart';
 
-import 'package:growth/models/bottom_tab_item.dart';
 import 'package:growth/providers/app_theme_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,42 +12,34 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _currentTabIndex = useState(0);
-    final _currentTab =
-        useMemoized(() => bottomTabList[_currentTabIndex.value]);
+    final _useCurrentTabIndex = useState(0);
+    final _useBottomTabList = useMemoized(() => BottomItemList().list());
+    final _useCurrentTab =
+        useMemoized(() => _useBottomTabList[_useCurrentTabIndex.value]);
 
     final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
 
-    Widget _buildPage(BottomTabItem tabItem) => Navigator(
-          key: tabItem.navigatorKey,
-          onGenerateRoute: (settings) => MaterialPageRoute(
-            settings: settings,
-            builder: (context) => tabItem.page,
-          ),
-        );
-    // Widget _buildPage(BottomTabItem tabItem) => tabItem.page;
-
     void _selectTab(int newIndex) {
-      if (_currentTabIndex.value != newIndex) {
-        _currentTabIndex.value = newIndex;
+      if (_useCurrentTabIndex.value != newIndex) {
+        _useCurrentTabIndex.value = newIndex;
       } else {
-        _currentTab.navigatorKey.currentState!
+        _useCurrentTab.navigatorKey.currentState!
             .popUntil((route) => route.isFirst);
       }
     }
 
     return WillPopScope(
       onWillPop: () async =>
-          !await _currentTab.navigatorKey.currentState!.maybePop(),
+          !await _useCurrentTab.navigatorKey.currentState!.maybePop(),
       child: Scaffold(
         body: IndexedStack(
-          index: _currentTabIndex.value,
-          children: bottomTabList.map(_buildPage).toList(),
+          index: _useCurrentTabIndex.value,
+          children: _useBottomTabList.map((item) => item.navigator).toList(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentTabIndex.value,
+          currentIndex: _useCurrentTabIndex.value,
           onTap: _selectTab,
-          items: bottomTabList
+          items: _useBottomTabList
               .map(
                 (item) => BottomNavigationBarItem(
                   label: item.pageName,

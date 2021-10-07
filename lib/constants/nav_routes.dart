@@ -1,29 +1,36 @@
+import 'package:flutter/material.dart';
 import 'package:growth/pages/app_wrapper.dart';
 
 import 'package:growth/pages/authentication/auth_options_page.dart';
 import 'package:growth/pages/authentication/email_auth_page.dart';
 import 'package:growth/pages/authentication/email_register_page.dart';
 import 'package:growth/pages/authentication/reset_password_page.dart';
+import 'package:growth/pages/home_page.dart';
 
 import 'package:growth/pages/misc/terms_conditions_page.dart';
+/// [NavigationRoutes] provided routes' names for navigation through the app.
+class NavigationRoutes {
+  static const String blankRoute = "/";
+  static const String termsRoute = "/terms";
+  static const String resetRoute = "/routes";
 
-import 'package:growth/pages/balance/balance_home_page.dart';
+  static const String authOptionsRoute = "/auth/options";
+  static const String authEmailRoute = "/auth/email";
+  static const String authRegisterRoute = "/auth/register";
 
-import 'package:growth/pages/garden/garden_home_page.dart';
+  static const String homeRoute = "/home";
 
-import 'package:growth/pages/settings/settings_home_page.dart';
+  static const String balanceDetailsRoute = "/balance/details";
 
-/// Named routes for navigation through the app.
-class NavigatonRoutes {
-  static var navRoutes = {
-    "/": (context) => const AppWrapper(),
-    "/terms": (context) => const TermsConditionsPage(),
-    "/reset": (context) => const ResetPasswordPage(),
-    "/auth/options": (context) => const AuthOptionsPage(),
-    "/auth/email": (context) => const EmailAuthPage(),
-    "/auth/register": (context) => const EmailRegisterPage(),
-    "/balance": (context) => const BalanceHomePage(),
-    "/garden": (context) => const GardenHomePage(),
-    "/settings": (context) => const SettingsHomePage(),
+  static const String gardenDetailsRoute = "/garden/details";
+
+  static Map<String, StatelessWidget Function(dynamic)> navRoutes = {
+    blankRoute: (context) => const AppWrapper(),
+    termsRoute: (context) => const TermsConditionsPage(),
+    resetRoute: (context) => const ResetPasswordPage(),
+    authOptionsRoute: (context) => const AuthOptionsPage(),
+    authEmailRoute: (context) => const EmailAuthPage(),
+    authRegisterRoute: (context) => const EmailRegisterPage(),
+    homeRoute: (context) => const HomePage(),
   };
 }

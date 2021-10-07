@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/services/validator_service.dart';
 import 'package:growth/styles/auth_text_field_style.dart';
 
@@ -65,7 +67,8 @@ class EmailAuthForm extends HookWidget {
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed("/reset");
+                    Navigator.of(context)
+                        .pushNamed(NavigationRoutes.resetRoute);
                   },
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),

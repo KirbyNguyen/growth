@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:growth/constants/nav_routes.dart';
 
 /// [RegisterText] provides the sign up link for new users.
 class RegisterText extends StatelessWidget {
@@ -16,7 +17,7 @@ class RegisterText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, "/auth/register");
+            Navigator.of(context).pushNamed(NavigationRoutes.authRegisterRoute);
           },
           child: Text(
             "Sign Up!",

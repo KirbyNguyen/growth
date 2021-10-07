@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/auth_status.dart';
 
-/// For displaying error diaglos
-/// Parameters: [BuildContext] - context
-/// Optional: [AuthStatus] - status and [String] - error
-/// Return: [AlertDialog]
+/// [CustomErrorDialog] provides functions for displaying custom error dialogs.
 class CustomErrorDialog {
   BuildContext context;
   CustomErrorDialog({required this.context});

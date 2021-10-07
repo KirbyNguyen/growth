@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:growth/constants/nav_routes.dart';
 
 class GardenHomePage extends HookWidget {
   const GardenHomePage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class GardenHomePage extends HookWidget {
       body: ElevatedButton(
         child: const Text("Test"),
         onPressed: () {
-          Navigator.of(context).pushNamed("/settings");
+          Navigator.of(context).pushNamed(NavigationRoutes.gardenDetailsRoute);
         },
       ),
     );

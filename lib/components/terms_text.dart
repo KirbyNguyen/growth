@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:growth/constants/nav_routes.dart';
 
 /// [TermsText] includes the "Terms and Conditions" text with a flavor text.
 class TermsText extends StatelessWidget {
@@ -27,7 +28,7 @@ class TermsText extends StatelessWidget {
                 ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamed("/terms");
+            Navigator.of(context).pushNamed(NavigationRoutes.termsRoute);
           },
         ),
       ],

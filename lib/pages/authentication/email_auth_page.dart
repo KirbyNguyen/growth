@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/constants/auth_status.dart';
 import 'package:growth/constants/custom_colors.dart';
 
@@ -94,8 +95,10 @@ class EmailAuthPage extends HookWidget {
                                     CustomErrorDialog(context: context);
                                 await errorDialog.showError(status);
                               } else {
-                                Navigator.of(context)
-                                    .popUntil(ModalRoute.withName("/"));
+                                Navigator.of(context).popUntil(
+                                  ModalRoute.withName(
+                                      NavigationRoutes.blankRoute),
+                                );
                               }
                             }
                             _useLoading.value = false;
