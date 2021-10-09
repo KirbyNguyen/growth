@@ -17,7 +17,7 @@ class HomePage extends HookWidget {
     final _useCurrentTab =
         useMemoized(() => _useBottomTabList[_useCurrentTabIndex.value]);
 
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
 
     void _selectTab(int newIndex) {
       if (_useCurrentTabIndex.value != newIndex) {
@@ -44,7 +44,7 @@ class HomePage extends HookWidget {
                 (item) => BottomNavigationBarItem(
                   label: item.pageName,
                   icon: Icon(item.iconData),
-                  backgroundColor: _useAppThemeStateProvider
+                  backgroundColor: _useAppThemeState
                       ? CustomColors.primaryDark
                       : CustomColors.primaryLight,
                 ),

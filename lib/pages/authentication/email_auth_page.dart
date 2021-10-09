@@ -21,9 +21,9 @@ class EmailAuthPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
 
-    final _useAuthServicesProvider = useProvider(authServicesProvider);
+    final _useAuthServices = useProvider(authServicesProvider);
 
     final _useEmailAuthFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
@@ -41,7 +41,7 @@ class EmailAuthPage extends HookWidget {
       ),
       body: Container(
         decoration:
-            AuthDecoration.authGradientBackground(_useAppThemeStateProvider),
+            AuthDecoration.authGradientBackground(_useAppThemeState),
         padding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height * 0.05,
           horizontal: MediaQuery.of(context).size.width * 0.10,
@@ -67,7 +67,7 @@ class EmailAuthPage extends HookWidget {
                     child: EmailAuthForm(
                         useEmailFormKey: _useEmailAuthFormKey,
                         useEmailTextController: _useEmailTextController,
-                        useAppThemeStateProvider: _useAppThemeStateProvider,
+                        useAppThemeStateProvider: _useAppThemeState,
                         usePasswordTextController: _usePasswordTextController),
                   ),
                   Flexible(
@@ -83,7 +83,8 @@ class EmailAuthPage extends HookWidget {
                             _useLoading.value = true;
                             if (_useEmailAuthFormKey.value.currentState!
                                 .validate()) {
-                              AuthStatus status = await _useAuthServicesProvider
+                              AuthStatus status =
+                                  await _useAuthServices
                                   .signInWithEmail(
                                       email: _useEmailTextController.text,
                                       password:
@@ -105,7 +106,7 @@ class EmailAuthPage extends HookWidget {
                           },
                           child: _useLoading.value
                               ? CircularProgressIndicator(
-                                  color: _useAppThemeStateProvider
+                                  color: _useAppThemeState
                                       ? CustomColors.canvasLight
                                       : CustomColors.canvasDark,
                                 )

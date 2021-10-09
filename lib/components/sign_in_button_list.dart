@@ -17,13 +17,13 @@ class AuthOptionsLowerContainer extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
 
     return Expanded(
       flex: 4,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: AuthDecoration.lowerContainer(_useAppThemeStateProvider),
+        decoration: AuthDecoration.lowerContainer(_useAppThemeState),
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -37,14 +37,14 @@ class AuthOptionsLowerContainer extends HookWidget {
                 children: <Widget>[
                   // Google Sign-in Button
                   SignInButton(
-                    _useAppThemeStateProvider
+                    _useAppThemeState
                         ? Buttons.GoogleDark
                         : Buttons.Google,
                     onPressed: () {},
                   ),
                   // Apple Sign-in Button
                   SignInButton(
-                    _useAppThemeStateProvider
+                    _useAppThemeState
                         ? Buttons.AppleDark
                         : Buttons.Apple,
                     onPressed: () {},
@@ -53,7 +53,7 @@ class AuthOptionsLowerContainer extends HookWidget {
                   SignInButtonBuilder(
                     text: "Sign in with Email",
                     icon: Icons.email,
-                    backgroundColor: _useAppThemeStateProvider
+                    backgroundColor: _useAppThemeState
                         ? CustomColors.primaryDark
                         : CustomColors.primaryLight,
                     onPressed: () {

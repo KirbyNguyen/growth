@@ -23,6 +23,7 @@ class AppTheme {
     fontFamily: "Poppins",
     brightness: Brightness.light,
     colorScheme: AppTheme().lightScheme,
+    dividerColor: CustomColors.canvasDark,
     appBarTheme: const AppBarTheme(
       color: CustomColors.primaryLight,
     ),
@@ -32,22 +33,12 @@ class AppTheme {
       unselectedItemColor: CustomColors.canvasLight,
     ),
     textTheme: const TextTheme(
-      headline1: TextStyle(),
-      headline2: TextStyle(),
-      headline3: TextStyle(),
-      headline4: TextStyle(),
-      headline5: TextStyle(),
-      headline6: TextStyle(),
-      subtitle1: TextStyle(),
-      subtitle2: TextStyle(),
       bodyText1: TextStyle(
         fontSize: 16.0,
       ),
       bodyText2: TextStyle(
         fontSize: 14.0,
       ),
-      button: TextStyle(),
-      caption: TextStyle(),
     ),
   );
 
@@ -55,6 +46,7 @@ class AppTheme {
     fontFamily: "Poppins",
     brightness: Brightness.dark,
     colorScheme: AppTheme().darkScheme,
+    dividerColor: CustomColors.canvasLight,
     appBarTheme: const AppBarTheme(
       color: CustomColors.primaryDark,
     ),
@@ -64,22 +56,12 @@ class AppTheme {
       unselectedItemColor: CustomColors.canvasDark,
     ),
     textTheme: const TextTheme(
-      headline1: TextStyle(),
-      headline2: TextStyle(),
-      headline3: TextStyle(),
-      headline4: TextStyle(),
-      headline5: TextStyle(),
-      headline6: TextStyle(),
-      subtitle1: TextStyle(),
-      subtitle2: TextStyle(),
       bodyText1: TextStyle(
         fontSize: 16.0,
       ),
       bodyText2: TextStyle(
         fontSize: 14.0,
       ),
-      button: TextStyle(),
-      caption: TextStyle(),
     ),
   );
 

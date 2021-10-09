@@ -22,6 +22,9 @@ class NavigationRoutes {
 
   static const String balanceDetailsRoute = "/balance/details";
 
+  static const String balanceAccountCreate = "/balance/account/create";
+  static const String balanceAccountInfo = "/balance/account/info";
+
   static const String gardenDetailsRoute = "/garden/details";
 
   static Map<String, StatelessWidget Function(dynamic)> navRoutes = {

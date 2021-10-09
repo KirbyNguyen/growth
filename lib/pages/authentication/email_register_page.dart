@@ -21,9 +21,9 @@ class EmailRegisterPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
 
-    final _useAuthServicesProvider = useProvider(authServicesProvider);
+    final _useAuthServices = useProvider(authServicesProvider);
 
     final _useEmailRegisterFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
@@ -41,7 +41,7 @@ class EmailRegisterPage extends HookWidget {
       appBar: AppBar(title: const Text("Sign Up")),
       body: Container(
         decoration:
-            AuthDecoration.authGradientBackground(_useAppThemeStateProvider),
+            AuthDecoration.authGradientBackground(_useAppThemeState),
         padding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height * 0.05,
         ),
@@ -62,7 +62,7 @@ class EmailRegisterPage extends HookWidget {
                       child: EmailRegisterForm(
                           useEmailRegisterFormKey: _useEmailRegisterFormKey,
                           useEmailTextController: _useEmailTextController,
-                          useAppThemeStateProvider: _useAppThemeStateProvider,
+                          useAppThemeStateProvider: _useAppThemeState,
                           usePasswordTextController: _usePasswordTextController,
                           useConfirmPasswordTextController:
                               _useConfirmPasswordTextController),
@@ -88,7 +88,7 @@ class EmailRegisterPage extends HookWidget {
                           if (_useEmailRegisterFormKey.value.currentState!
                               .validate()) {
                             AuthStatus status =
-                                await _useAuthServicesProvider.signUpWithEmail(
+                                await _useAuthServices.signUpWithEmail(
                                     email: _useEmailTextController.text,
                                     password: _usePasswordTextController.text);
 
@@ -108,7 +108,7 @@ class EmailRegisterPage extends HookWidget {
                         },
                         child: _useLoading.value
                             ? CircularProgressIndicator(
-                                color: _useAppThemeStateProvider
+                                color: _useAppThemeState
                                     ? CustomColors.canvasLight
                                     : CustomColors.canvasDark,
                               )

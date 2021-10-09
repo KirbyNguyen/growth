@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/nav_routes.dart';
 
+import 'package:growth/pages/account/account_info_page.dart';
+
 import 'package:growth/pages/balance/balance_details_page.dart';
 import 'package:growth/pages/balance/balance_home_page.dart';
 
@@ -26,6 +28,15 @@ class BottomTabNavigators {
             case NavigationRoutes.balanceDetailsRoute:
               builder = (BuildContext context) => const BalanceDetailsPage();
               break;
+            case NavigationRoutes.balanceAccountCreate:
+              builder =
+                  (BuildContext context) => AccountInfoPage(title: "Create");
+              break;
+            case NavigationRoutes.balanceAccountInfo:
+              builder =
+                  (BuildContext context) => AccountInfoPage(title: "Info");
+              break;
+
             default:
               throw Exception("Invalid route: ${settings.name}");
           }

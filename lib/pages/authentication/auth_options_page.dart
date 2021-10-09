@@ -13,7 +13,7 @@ class AuthOptionsPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+    final _useAppThemeState = useProvider(appThemeStateProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -22,7 +22,7 @@ class AuthOptionsPage extends HookWidget {
         children: <Widget>[
           Container(
             decoration: AuthDecoration.authGradientBackground(
-                _useAppThemeStateProvider),
+                _useAppThemeState),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -37,7 +37,7 @@ class AuthOptionsPage extends HookWidget {
               width: MediaQuery.of(context).size.width * 0.55,
               height: MediaQuery.of(context).size.height * 0.55,
               decoration:
-                  AuthDecoration.logoContainer(_useAppThemeStateProvider),
+                  AuthDecoration.logoContainer(_useAppThemeState),
             ),
           ),
         ],
