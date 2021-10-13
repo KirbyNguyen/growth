@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:currency_picker/currency_picker.dart';
 
 import 'package:growth/models/account_type.dart';
 import 'package:growth/styles/text_field_style.dart';
@@ -28,13 +29,13 @@ class AccountInfoPage extends HookWidget {
 
     final _useCurrencyTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
+    var _useCurrency = useState<Currency?>(null);
 
     final _useBalanceTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
 
     final _useColorTextController =
         useTextEditingController.fromValue(TextEditingValue.empty);
-
 
     return Scaffold(
       appBar: AppBar(
@@ -60,9 +61,9 @@ class AccountInfoPage extends HookWidget {
                 ),
                 // Type text field
                 GestureDetector(
+                  // Set the account type and
+                  // change corresponding text controller
                   onTap: () async {
-                    // Set the account type and
-                    // change corresponding text controller
                     _useAccountType.value =
                         await AccountTypeModal().showModal(context);
 
@@ -92,17 +93,53 @@ class AccountInfoPage extends HookWidget {
                   ),
                 ),
                 // Currency text field
-                TextFormField(
-                  controller: _useCurrencyTextController,
-                  decoration:
-                      TextFieldDecoration.textField(_useAppThemeState).copyWith(
-                    hintText: "Currency",
-                    prefixIcon: const Icon(Icons.paid),
+                GestureDetector(
+                  onTap: () => showCurrencyPicker(
+                    context: context,
+                    showFlag: true,
+                    showCurrencyName: true,
+                    showCurrencyCode: true,
+                    onSelect: (Currency currency) {
+                      _useCurrency.value = currency;
+                      _useCurrencyTextController.text =
+                          _useCurrency.value != null
+                              ? _useCurrency.value!.code +
+                                  " - " +
+                                  _useCurrency.value!.symbol
+                              : "";
+                    },
+                  ),
+                  child: Container(
+                    color: Colors.transparent,
+                    child: IgnorePointer(
+                      child: TextFormField(
+                        controller: _useCurrencyTextController,
+                        decoration:
+                            TextFieldDecoration.textField(_useAppThemeState)
+                                .copyWith(
+                          hintText: "Currency",
+                          prefixIcon: _useCurrency.value != null
+                              ? Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      8.0, 8.0, 0.0, 0.0),
+                                  child: Text(
+                                    CurrencyUtils.currencyToEmoji(
+                                        _useCurrency.value),
+                                    style: const TextStyle(
+                                      fontSize: 25.0,
+                                    ),
+                                  ),
+                                )
+                              : const Icon(Icons.local_atm),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 // Balance text field
                 TextFormField(
                   controller: _useBalanceTextController,
+                  keyboardType: TextInputType.number,
                   decoration:
                       TextFieldDecoration.textField(_useAppThemeState).copyWith(
                     hintText: "Balance",
@@ -115,6 +152,7 @@ class AccountInfoPage extends HookWidget {
                   decoration:
                       TextFieldDecoration.textField(_useAppThemeState).copyWith(
                     hintText: "Color",
+                    prefixIcon: const Icon(Icons.palette),
                   ),
                 ),
                 // Submit button

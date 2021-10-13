@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
+
 import 'package:growth/models/account_type.dart';
+import 'package:growth/constants/existing_type_list.dart';
 
 /// [AccountTypeModal] provides a way to show a modal with [AccountType].
 class AccountTypeModal {
-  final List<AccountType> _existingTypeList = [
-    AccountType(
-      name: "General",
-      iconPoint: 57409,
-      iconFamily: AccountType.materialFamily,
-    ),
-    AccountType(
-      name: "Cash",
-      iconPoint: 58359,
-      iconFamily: AccountType.materialFamily,
-    ),
-    AccountType(
-      name: "Checking",
-      iconPoint: 57408,
-      iconFamily: AccountType.materialFamily,
-    ),
-  ];
-
   List<AccountType> typeList = [];
 
   /// Takes in a [BuildContext] to build a bottom modal for [AccountType].
   Future<dynamic> showModal(BuildContext context) {
-    typeList = _existingTypeList;
+    typeList = ExistingTypeList.list;
 
     return showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
       builder: (context) {
         return ListView.builder(
           itemCount: typeList.length,
