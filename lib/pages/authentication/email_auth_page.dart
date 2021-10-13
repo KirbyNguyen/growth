@@ -6,16 +6,18 @@ import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/constants/auth_status.dart';
 import 'package:growth/constants/custom_colors.dart';
 
-import 'package:growth/components/sign_up_test.dart';
+import 'package:growth/components/sign_up_text.dart';
 import 'package:growth/components/error_dialog.dart';
-import 'package:growth/components/email_auth_form.dart';
+
+import 'package:growth/services/validator_service.dart';
 
 import 'package:growth/styles/auth_decoration.dart';
+import 'package:growth/styles/auth_text_field_style.dart';
 
 import 'package:growth/providers/app_theme_provider.dart';
 import 'package:growth/providers/firebase_auth_provider.dart';
 
-/// Authentication page for email logins.
+/// [EmailAuthPage] provides authentication for email logins.
 class EmailAuthPage extends HookWidget {
   const EmailAuthPage({Key? key}) : super(key: key);
 
@@ -40,8 +42,7 @@ class EmailAuthPage extends HookWidget {
         title: const Text("Email Sign-in"),
       ),
       body: Container(
-        decoration:
-            AuthDecoration.authGradientBackground(_useAppThemeState),
+        decoration: AuthDecoration.authGradientBackground(_useAppThemeState),
         padding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height * 0.05,
           horizontal: MediaQuery.of(context).size.width * 0.10,
@@ -62,6 +63,7 @@ class EmailAuthPage extends HookWidget {
                       ),
                     ),
                   ),
+                  // Email authentication form
                   Expanded(
                     flex: 3,
                     child: EmailAuthForm(
@@ -70,6 +72,7 @@ class EmailAuthPage extends HookWidget {
                         useAppThemeStateProvider: _useAppThemeState,
                         usePasswordTextController: _usePasswordTextController),
                   ),
+                  // Submit button
                   Flexible(
                     fit: FlexFit.loose,
                     flex: 1,
@@ -84,8 +87,7 @@ class EmailAuthPage extends HookWidget {
                             if (_useEmailAuthFormKey.value.currentState!
                                 .validate()) {
                               AuthStatus status =
-                                  await _useAuthServices
-                                  .signInWithEmail(
+                                  await _useAuthServices.signInWithEmail(
                                       email: _useEmailTextController.text,
                                       password:
                                           _usePasswordTextController.text);
@@ -118,6 +120,7 @@ class EmailAuthPage extends HookWidget {
                       ),
                     ),
                   ),
+                  // Register text
                   const Flexible(
                     flex: 1,
                     child: RegisterText(),
@@ -127,6 +130,91 @@ class EmailAuthPage extends HookWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// [EmailAuthForm] provides 2 text fields for email, and password.
+class EmailAuthForm extends HookWidget {
+  const EmailAuthForm({
+    Key? key,
+    required ValueNotifier<GlobalKey<FormState>> useEmailFormKey,
+    required TextEditingController useEmailTextController,
+    required bool useAppThemeStateProvider,
+    required TextEditingController usePasswordTextController,
+  })  : _useEmailFormKey = useEmailFormKey,
+        _useEmailTextController = useEmailTextController,
+        _useAppThemeStateProvider = useAppThemeStateProvider,
+        _usePasswordTextController = usePasswordTextController,
+        super(key: key);
+
+  final ValueNotifier<GlobalKey<FormState>> _useEmailFormKey;
+  final bool _useAppThemeStateProvider;
+  final TextEditingController _useEmailTextController;
+  final TextEditingController _usePasswordTextController;
+
+  @override
+  Widget build(BuildContext context) {
+    final _usePasswordObscured = useState<bool>(true);
+
+    return Form(
+      key: _useEmailFormKey.value,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          // Email text field
+          TextFormField(
+            controller: _useEmailTextController,
+            textCapitalization: TextCapitalization.none,
+            autocorrect: false,
+            validator: (value) => ValidatorService.validateEmail(value),
+            decoration:
+                AuthTextFieldDecoration.authTextField(_useAppThemeStateProvider)
+                    .copyWith(hintText: "Email"),
+          ),
+          Column(
+            children: <Widget>[
+              // Password text field
+              TextFormField(
+                autocorrect: false,
+                controller: _usePasswordTextController,
+                obscureText: _usePasswordObscured.value,
+                textCapitalization: TextCapitalization.none,
+                validator: (value) => ValidatorService.validatePassword(value),
+                decoration: AuthTextFieldDecoration.authTextField(
+                        _useAppThemeStateProvider)
+                    .copyWith(
+                  hintText: "Password",
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      _usePasswordObscured.value = !_usePasswordObscured.value;
+                    },
+                    child: AuthTextFieldDecoration.passwordObscureIcon(
+                        _useAppThemeStateProvider, _usePasswordObscured.value),
+                  ),
+                ),
+              ),
+              // Reset password touchable text
+              Align(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(NavigationRoutes.resetRoute);
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
+                    child: Text(
+                      "Reset Password",
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

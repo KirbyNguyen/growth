@@ -28,13 +28,9 @@ class BottomTabNavigators {
             case NavigationRoutes.balanceDetailsRoute:
               builder = (BuildContext context) => const BalanceDetailsPage();
               break;
-            case NavigationRoutes.balanceAccountCreate:
+            case NavigationRoutes.balanceAccount:
               builder =
-                  (BuildContext context) => AccountInfoPage(title: "Create");
-              break;
-            case NavigationRoutes.balanceAccountInfo:
-              builder =
-                  (BuildContext context) => AccountInfoPage(title: "Info");
+                  (BuildContext context) => const AccountInfoPage();
               break;
 
             default:

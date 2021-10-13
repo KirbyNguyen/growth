@@ -9,9 +9,10 @@ class CustomScaffold extends HookWidget {
   const CustomScaffold._({
     Key? key,
     required this.title,
-    required this.sliverChildDelegate,
-    this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     required this.actions,
+    required this.sliverChildDelegate,
+    this.floatingActionButton,
+    this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
   }) : super(key: key);
 
   factory CustomScaffold({
@@ -19,6 +20,7 @@ class CustomScaffold extends HookWidget {
     required String title,
     required List<Widget> actions,
     required List<Widget> children,
+    FloatingActionButton? floatingActionButton,
     EdgeInsets padding =
         const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
   }) =>
@@ -27,14 +29,16 @@ class CustomScaffold extends HookWidget {
           title: title,
           actions: actions,
           padding: padding,
+          floatingActionButton: floatingActionButton,
           sliverChildDelegate: SliverChildListDelegate(children));
 
   factory CustomScaffold.builder({
     Key? key,
     required String title,
-    required IndexedWidgetBuilder builder,
     required int childCount,
     required List<Widget> actions,
+    required IndexedWidgetBuilder builder,
+    FloatingActionButton? floatingActionButton,
     EdgeInsets padding =
         const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
   }) =>
@@ -43,15 +47,14 @@ class CustomScaffold extends HookWidget {
           title: title,
           actions: actions,
           padding: padding,
+          floatingActionButton: floatingActionButton,
           sliverChildDelegate:
               SliverChildBuilderDelegate(builder, childCount: childCount));
 
   final String title;
-
-  final List<Widget> actions;
-
   final EdgeInsets padding;
-
+  final List<Widget> actions;
+  final FloatingActionButton? floatingActionButton;
   final SliverChildDelegate sliverChildDelegate;
 
   @override
@@ -59,6 +62,7 @@ class CustomScaffold extends HookWidget {
     final _useAppThemeState = useProvider(appThemeStateProvider);
 
     return Scaffold(
+      floatingActionButton: floatingActionButton,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(

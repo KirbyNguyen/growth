@@ -19,6 +19,10 @@ class BalanceHomePage extends HookWidget {
     return CustomScaffold(
       title: "Balance",
       actions: const [],
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
       children: [
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -26,15 +30,10 @@ class BalanceHomePage extends HookWidget {
             children: <Widget>[
               AccountCard.addCard(
                 function: () => Navigator.of(context).pushNamed(
-                  NavigationRoutes.balanceAccountCreate,
+                  NavigationRoutes.balanceAccount,
+                  arguments: "null",
                 ),
                 isDarkModeEnabled: _useAppThemeState,
-              ),
-              AccountCard(
-                data: const Text("Edit an account"),
-                function: () => Navigator.of(context).pushNamed(
-                  NavigationRoutes.balanceAccountInfo,
-                ),
               ),
             ],
           ),
