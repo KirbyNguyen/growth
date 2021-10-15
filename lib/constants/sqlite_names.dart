@@ -11,7 +11,7 @@ class SQLiteNames {
   static const String transactionTable = "TRANSACTION_TABLE";
 
   static const String id = "id";
-  static const String uId = "uid";
+  static const String userId = "userId";
   static const String name = "name";
   static const String iconPoint = "iconPoint";
   static const String iconFamily = "iconFamily";

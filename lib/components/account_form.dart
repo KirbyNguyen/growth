@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:growth/models/balance_account.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:currency_picker/currency_picker.dart';
 
@@ -9,7 +8,9 @@ import 'package:growth/constants/custom_colors.dart';
 import 'package:growth/components/account_type_modal.dart';
 
 import 'package:growth/models/account_type.dart';
+import 'package:growth/models/balance_account.dart';
 
+import 'package:growth/providers/account_provider.dart';
 import 'package:growth/providers/app_theme_provider.dart';
 import 'package:growth/providers/firebase_auth_provider.dart';
 
@@ -47,6 +48,8 @@ class AccountForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _useAccountListNotifer = useProvider(accountProvider.notifier);
+
     final _useAccountFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
     final _useLoading = useState<bool>(false);
@@ -177,19 +180,24 @@ class AccountForm extends HookWidget {
           ),
           // Submit button
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               _useLoading.value = true;
               if (_useAccountFormKey.value.currentState!.validate()) {
-                // BalanceAccount newType = BalanceAccount(
-                //   userId: _useAuthState.data!.value!.uid,
-                //   accountTypeId: _useAccountType.value!.id,
-                //   name: _useNameTextController.text,
-                //   balance: double.parse(_useBalanceTextController.text),
-                //   currencyFlag: _useCurrencyFlag.value!,
-                //   currencyCode: _useCurrencyTextController.text,
-                //   colorValue: int.parse(_useColorTextController.text),
-                // );
-                // print(newType);
+                BalanceAccount newAccounnt = BalanceAccount(
+                  userId: _useAuthState.data!.value!.uid,
+                  accountTypeId: _useAccountType.value!.id,
+                  name: _useNameTextController.text,
+                  balance: double.parse(_useBalanceTextController.text),
+                  currencyFlag: _useCurrencyFlag.value!,
+                  currencyCode: _useCurrencyTextController.text,
+                  colorValue: int.parse(_useColorTextController.text),
+                );
+                try {
+                  await _useAccountListNotifer.insert(newAccounnt);
+                  Navigator.of(context).pop();
+                } catch (error) {
+                  print(error);
+                }
               }
               _useLoading.value = false;
             },

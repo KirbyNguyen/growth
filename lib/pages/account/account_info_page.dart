@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:growth/components/account_form.dart';
+
 import 'package:growth/constants/existing_type_list.dart';
 
 import 'package:growth/models/account_type.dart';

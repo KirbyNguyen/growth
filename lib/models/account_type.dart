@@ -28,7 +28,7 @@ class AccountType {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> tempMap = <String, dynamic>{
       SQLiteNames.id: _id,
-      SQLiteNames.uId: uid,
+      SQLiteNames.userId: uid,
       SQLiteNames.name: name,
       SQLiteNames.iconPoint: iconPoint,
       SQLiteNames.iconFamily: iconFamily
@@ -40,7 +40,7 @@ class AccountType {
   /// Take in a [Map] with <String, dynamic>.
   AccountType.fromMap(Map<dynamic, dynamic> map) {
     _id = map[SQLiteNames.id];
-    uid = map[SQLiteNames.uId] ?? "";
+    uid = map[SQLiteNames.userId] ?? "";
     name = map[SQLiteNames.name];
     iconPoint = map[SQLiteNames.iconPoint];
     iconFamily = map[SQLiteNames.iconFamily];
@@ -52,7 +52,7 @@ class AccountType {
   AccountType fromValue(Map<dynamic, dynamic> map) {
     AccountType accountType = AccountType(
       id: map[SQLiteNames.id],
-      uid: map[SQLiteNames.uId] ?? "",
+      uid: map[SQLiteNames.userId] ?? "",
       name: map[SQLiteNames.name],
       iconPoint: map[SQLiteNames.iconPoint],
       iconFamily: map[SQLiteNames.iconFamily],
