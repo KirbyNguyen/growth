@@ -10,7 +10,7 @@ final sharedUtilityProvider = Provider<SharedUtility>((ref) {
   return SharedUtility(sharedPreferences: _sharedPrefs);
 });
 
-/// Shared Utility class that holds information such as [isDarkModeEnabled].
+/// [SharedUtility] class that holds information such as [isDarkModeEnabled].
 class SharedUtility {
   SharedUtility({
     required this.sharedPreferences,

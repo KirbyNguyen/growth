@@ -1,6 +1,6 @@
-import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:growth/models/balance_account.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:currency_picker/currency_picker.dart';
 
@@ -180,14 +180,16 @@ class AccountForm extends HookWidget {
             onPressed: () {
               _useLoading.value = true;
               if (_useAccountFormKey.value.currentState!.validate()) {
-                // var uuid = const Uuid();
-                // print("Account ID: " + uuid.v4());
-                // print("User ID: " + _useAuthState.data!.value!.uid);
-                // print("Account Type ID: " + _useAccountType.value!.id);
-                // print("Name: " + _useNameTextController.text);
-                // print("Currency: " + _useCurrencyFlag.value!);
-                // print("Balance: " + _useBalanceTextController.text);
-                // print("Color: " + _useColorTextController.text);
+                // BalanceAccount newType = BalanceAccount(
+                //   userId: _useAuthState.data!.value!.uid,
+                //   accountTypeId: _useAccountType.value!.id,
+                //   name: _useNameTextController.text,
+                //   balance: double.parse(_useBalanceTextController.text),
+                //   currencyFlag: _useCurrencyFlag.value!,
+                //   currencyCode: _useCurrencyTextController.text,
+                //   colorValue: int.parse(_useColorTextController.text),
+                // );
+                // print(newType);
               }
               _useLoading.value = false;
             },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:growth/models/balance_account.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:growth/components/account_card.dart';
@@ -32,15 +31,6 @@ class BalanceHomePage extends HookWidget {
               AccountCard.addCard(
                 function: () => Navigator.of(context).pushNamed(
                   NavigationRoutes.balanceAccount,
-                  arguments: BalanceAccount(
-                      id: 'id',
-                      userId: 'userId',
-                      accountTypeId: "GENERIC_CASH",
-                      name: "Cash",
-                      balance: 500.0,
-                      currencyFlag: "USD",
-                      currencyCode: "USD",
-                      colorValue: 12312312),
                 ),
                 isDarkModeEnabled: _useAppThemeState,
               ),

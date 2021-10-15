@@ -20,5 +20,11 @@ class ExistingTypeList {
       iconPoint: 57408,
       iconFamily: AccountType.materialFamily,
     ),
+    AccountType(
+      id: "GENERIC_SAVING",
+      name: "Saving",
+      iconPoint: 58707,
+      iconFamily: AccountType.materialFamily,
+    ),
   ];
 }

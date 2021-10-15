@@ -1,4 +1,8 @@
+import 'package:uuid/uuid.dart';
+
 class BalanceAccount {
+  final Uuid uuid = const Uuid();
+  
   late String _id;
   late String _userId;
   late String _accountTypeId;
@@ -9,7 +13,7 @@ class BalanceAccount {
   late int colorValue;
 
   BalanceAccount({
-    required String id,
+    String? id,
     required String userId,
     required String accountTypeId,
     required this.name,
@@ -18,7 +22,7 @@ class BalanceAccount {
     required this.currencyCode,
     required this.colorValue,
   }) {
-    _id = id;
+    _id = id ?? uuid.v4();
     _userId = userId;
     _accountTypeId = accountTypeId;
   }
