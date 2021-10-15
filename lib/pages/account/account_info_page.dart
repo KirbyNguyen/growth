@@ -45,6 +45,8 @@ class AccountInfoPage extends HookWidget {
             ? TextEditingValue(text: args.balance.toString())
             : TextEditingValue.empty);
 
+    final _useColor =
+        useState<Color?>(args != null ? Color(args.colorValue) : null);
     final _useColorTextController = useTextEditingController.fromValue(
         args != null
             ? TextEditingValue(text: args.colorValue.toString())
@@ -73,6 +75,7 @@ class AccountInfoPage extends HookWidget {
               useCurrencyFlag: _useCurrencyFlag,
               useCurrencyTextController: _useCurrencyTextController,
               useBalanceTextController: _useBalanceTextController,
+              useColor: _useColor,
               useColorTextController: _useColorTextController,
             ),
           ),

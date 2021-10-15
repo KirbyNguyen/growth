@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:currency_picker/currency_picker.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'package:growth/constants/custom_colors.dart';
 
@@ -28,6 +29,7 @@ class AccountForm extends HookWidget {
     required ValueNotifier<String?> useCurrencyFlag,
     required TextEditingController useCurrencyTextController,
     required TextEditingController useBalanceTextController,
+    required ValueNotifier<Color?> useColor,
     required TextEditingController useColorTextController,
   })  : _useNameTextController = useNameTextController,
         _useAccountType = useAccountType,
@@ -35,6 +37,7 @@ class AccountForm extends HookWidget {
         _useCurrencyFlag = useCurrencyFlag,
         _useCurrencyTextController = useCurrencyTextController,
         _useBalanceTextController = useBalanceTextController,
+        _useColor = useColor,
         _useColorTextController = useColorTextController,
         super(key: key);
 
@@ -44,6 +47,7 @@ class AccountForm extends HookWidget {
   final ValueNotifier<String?> _useCurrencyFlag;
   final TextEditingController _useCurrencyTextController;
   final TextEditingController _useBalanceTextController;
+  final ValueNotifier<Color?> _useColor;
   final TextEditingController _useColorTextController;
 
   @override
@@ -56,6 +60,10 @@ class AccountForm extends HookWidget {
 
     final _useAppThemeState = useProvider(appThemeStateProvider);
     final _useAuthState = useProvider(authStateProvider);
+
+    final _usePickerColor = useState<Color>(
+      _useAppThemeState ? CustomColors.canvasLight : CustomColors.canvasDark,
+    );
 
     return Form(
       key: _useAccountFormKey.value,
@@ -169,13 +177,59 @@ class AccountForm extends HookWidget {
             ),
           ),
           // Color text field
-          TextFormField(
-            controller: _useColorTextController,
-            validator: ValidatorService.validate,
-            decoration:
-                TextFieldDecoration.textField(_useAppThemeState).copyWith(
-              hintText: "Color",
-              prefixIcon: const Icon(Icons.palette),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    titlePadding: const EdgeInsets.all(0.0),
+                    contentPadding: const EdgeInsets.all(0.0),
+                    content: SingleChildScrollView(
+                      child: ColorPicker(
+                        pickerColor: _usePickerColor.value,
+                        onColorChanged: (Color color) =>
+                            _usePickerColor.value = color,
+                      ),
+                    ),
+                    actions: <Widget>[
+                      ElevatedButton(
+                        child: const Text('Got it'),
+                        onPressed: () {
+                          _useColor.value = _usePickerColor.value;
+                          _useColorTextController.text =
+                              _useColor.value?.value.toString() ?? "";
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: IgnorePointer(
+                child: TextFormField(
+                  controller: _useColorTextController,
+                  validator: ValidatorService.validate,
+                  style: TextStyle(
+                    color: _useColor.value != null
+                        ? Color(_useColor.value!.value)
+                        : Theme.of(context).unselectedWidgetColor,
+                  ),
+                  decoration:
+                      TextFieldDecoration.textField(_useAppThemeState).copyWith(
+                    hintText: "Color",
+                    prefixIcon: Icon(
+                      Icons.palette,
+                      color: _useColor.value != null
+                          ? Color(_useColor.value!.value)
+                          : Theme.of(context).unselectedWidgetColor,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           // Submit button
@@ -183,7 +237,7 @@ class AccountForm extends HookWidget {
             onPressed: () async {
               _useLoading.value = true;
               if (_useAccountFormKey.value.currentState!.validate()) {
-                BalanceAccount newAccounnt = BalanceAccount(
+                BalanceAccount newAccount = BalanceAccount(
                   userId: _useAuthState.data!.value!.uid,
                   accountTypeId: _useAccountType.value!.id,
                   name: _useNameTextController.text,
@@ -193,10 +247,10 @@ class AccountForm extends HookWidget {
                   colorValue: int.parse(_useColorTextController.text),
                 );
                 try {
-                  await _useAccountListNotifer.insert(newAccounnt);
+                  await _useAccountListNotifer.insert(newAccount);
                   Navigator.of(context).pop();
                 } catch (error) {
-                  print(error);
+                  // print(error);
                 }
               }
               _useLoading.value = false;

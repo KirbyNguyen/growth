@@ -40,6 +40,8 @@ class BalanceAccount {
       SQLiteNames.name: name,
       SQLiteNames.balance: balance,
       SQLiteNames.colorValue: colorValue,
+      SQLiteNames.currencyCode: currencyCode,
+      SQLiteNames.currencyFlag: currencyFlag,
     };
     return tempMap;
   }

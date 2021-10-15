@@ -1,5 +1,5 @@
 import 'package:growth/constants/sqlite_names.dart';
-import 'package:growth/databases/sqlite_database.dart';
+import 'package:growth/services/sqlite_service.dart';
 import 'package:growth/models/account_db_helper.dart';
 import 'package:growth/models/balance_account.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -15,4 +15,14 @@ class AccountCardStyle {
       borderRadius: BorderRadius.circular(30.0),
     );
   }
+
+  static BoxDecoration normalCard(int colorValue) {
+    return BoxDecoration(
+      border: Border.all(
+        width: 3.0,
+        color: Color(colorValue),
+      ),
+      borderRadius: BorderRadius.circular(30.0),
+    );
+  }
 }
