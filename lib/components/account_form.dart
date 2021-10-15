@@ -24,14 +24,14 @@ class AccountForm extends HookWidget {
     required TextEditingController useNameTextController,
     required ValueNotifier<AccountType?> useAccountType,
     required TextEditingController useTypeTextController,
-    required ValueNotifier<Currency?> useCurrency,
+    required ValueNotifier<String?> useCurrencyFlag,
     required TextEditingController useCurrencyTextController,
     required TextEditingController useBalanceTextController,
     required TextEditingController useColorTextController,
   })  : _useNameTextController = useNameTextController,
         _useAccountType = useAccountType,
         _useTypeTextController = useTypeTextController,
-        _useCurrency = useCurrency,
+        _useCurrencyFlag = useCurrencyFlag,
         _useCurrencyTextController = useCurrencyTextController,
         _useBalanceTextController = useBalanceTextController,
         _useColorTextController = useColorTextController,
@@ -40,7 +40,7 @@ class AccountForm extends HookWidget {
   final TextEditingController _useNameTextController;
   final ValueNotifier<AccountType?> _useAccountType;
   final TextEditingController _useTypeTextController;
-  final ValueNotifier<Currency?> _useCurrency;
+  final ValueNotifier<String?> _useCurrencyFlag;
   final TextEditingController _useCurrencyTextController;
   final TextEditingController _useBalanceTextController;
   final TextEditingController _useColorTextController;
@@ -75,7 +75,8 @@ class AccountForm extends HookWidget {
             // change corresponding text controller
             onTap: () async {
               _useAccountType.value =
-                  await AccountTypeModal().showModal(context);
+                  await AccountTypeModal().showModal(context) ??
+                      _useAccountType.value;
 
               _useTypeTextController.text = _useAccountType.value != null
                   ? _useAccountType.value!.name
@@ -109,12 +110,8 @@ class AccountForm extends HookWidget {
               showCurrencyName: true,
               showCurrencyCode: true,
               onSelect: (Currency currency) {
-                _useCurrency.value = currency;
-                _useCurrencyTextController.text = _useCurrency.value != null
-                    ? _useCurrency.value!.code +
-                        " - " +
-                        _useCurrency.value!.symbol
-                    : "";
+                _useCurrencyTextController.text = currency.code;
+                _useCurrencyFlag.value = currency.flag;
               },
             ),
             child: Container(
@@ -126,12 +123,26 @@ class AccountForm extends HookWidget {
                   decoration:
                       TextFieldDecoration.textField(_useAppThemeState).copyWith(
                     hintText: "Currency",
-                    prefixIcon: _useCurrency.value != null
+                    prefixIcon: _useCurrencyFlag.value != null
                         ? Padding(
                             padding:
                                 const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
                             child: Text(
-                              CurrencyUtils.currencyToEmoji(_useCurrency.value),
+                              CurrencyUtils.currencyToEmoji(
+                                Currency(
+                                  flag: _useCurrencyFlag.value!,
+                                  code: _useCurrencyTextController.text,
+                                  name: '',
+                                  number: 1,
+                                  symbol: '',
+                                  namePlural: '',
+                                  decimalDigits: 1,
+                                  symbolOnLeft: true,
+                                  decimalSeparator: ',',
+                                  thousandsSeparator: '',
+                                  spaceBetweenAmountAndSymbol: true,
+                                ),
+                              ),
                               style: const TextStyle(
                                 fontSize: 25.0,
                               ),
@@ -169,14 +180,14 @@ class AccountForm extends HookWidget {
             onPressed: () {
               _useLoading.value = true;
               if (_useAccountFormKey.value.currentState!.validate()) {
-                var uuid = Uuid();
-                print("Account ID: " + uuid.v4());
-                print("User ID: " + _useAuthState.data!.value!.uid);
-                print("Account Type ID: " + _useAccountType.value!.id);
-                print("Name: " + _useNameTextController.text);
-                print("Currency: " + _useCurrency.value!.code);
-                print("Balance: " + _useBalanceTextController.text);
-                print("Color: " + _useColorTextController.text);
+                // var uuid = const Uuid();
+                // print("Account ID: " + uuid.v4());
+                // print("User ID: " + _useAuthState.data!.value!.uid);
+                // print("Account Type ID: " + _useAccountType.value!.id);
+                // print("Name: " + _useNameTextController.text);
+                // print("Currency: " + _useCurrencyFlag.value!);
+                // print("Balance: " + _useBalanceTextController.text);
+                // print("Color: " + _useColorTextController.text);
               }
               _useLoading.value = false;
             },

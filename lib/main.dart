@@ -30,6 +30,7 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final _useAppTheme = useProvider(appThemeProvider);
     final _useAppThemeState = useProvider(appThemeStateProvider);
+
     return MaterialApp(
       title: "Growth",
       theme: _useAppTheme.getThemeData(context, _useAppThemeState),

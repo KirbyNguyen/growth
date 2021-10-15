@@ -36,96 +36,106 @@ class EmailRegisterPage extends HookWidget {
 
     final _useLoading = useState<bool>(false);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text("Sign Up")),
-      body: Container(
-        decoration:
-            AuthDecoration.authGradientBackground(_useAppThemeState),
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.05,
-        ),
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  // Email sign-up form
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.10,
-                      ),
-                      child: EmailRegisterForm(
-                          useEmailRegisterFormKey: _useEmailRegisterFormKey,
-                          useEmailTextController: _useEmailTextController,
-                          useAppThemeStateProvider: _useAppThemeState,
-                          usePasswordTextController: _usePasswordTextController,
-                          useConfirmPasswordTextController:
-                              _useConfirmPasswordTextController),
-                    ),
-                  ),
-                  // Terms and conditions text
-                  const Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: TermsText(
-                        flavorText: "By signing up, you agree with our",
-                      ),
-                    ),
-                  ),
-                  // Submit button
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 2,
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.09,
-                      width: MediaQuery.of(context).size.width * 0.60,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          _useLoading.value = true;
-                          if (_useEmailRegisterFormKey.value.currentState!
-                              .validate()) {
-                            AuthStatus status =
-                                await _useAuthServices.signUpWithEmail(
-                                    email: _useEmailTextController.text,
-                                    password: _usePasswordTextController.text);
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
 
-                            // Checks error server side
-                            if (status != AuthStatus.successful) {
-                              CustomErrorDialog errorDialog =
-                                  CustomErrorDialog(context: context);
-                              await errorDialog.showError(status);
-                            } else {
-                              Navigator.of(context).popUntil(
-                                ModalRoute.withName(
-                                    NavigationRoutes.blankRoute),
-                              );
-                            }
-                          }
-                          _useLoading.value = false;
-                        },
-                        child: _useLoading.value
-                            ? CircularProgressIndicator(
-                                color: _useAppThemeState
-                                    ? CustomColors.canvasLight
-                                    : CustomColors.canvasDark,
-                              )
-                            : Text(
-                                "SIGN UP",
-                                style: Theme.of(context).textTheme.headline4,
-                              ),
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(title: const Text("Sign Up")),
+        body: Container(
+          decoration: AuthDecoration.authGradientBackground(_useAppThemeState),
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.05,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    // Email sign-up form
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.10,
+                        ),
+                        child: EmailRegisterForm(
+                            useEmailRegisterFormKey: _useEmailRegisterFormKey,
+                            useEmailTextController: _useEmailTextController,
+                            useAppThemeStateProvider: _useAppThemeState,
+                            usePasswordTextController:
+                                _usePasswordTextController,
+                            useConfirmPasswordTextController:
+                                _useConfirmPasswordTextController),
                       ),
                     ),
-                  ),
-                ],
+                    // Terms and conditions text
+                    const Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: TermsText(
+                          flavorText: "By signing up, you agree with our",
+                        ),
+                      ),
+                    ),
+                    // Submit button
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 2,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.09,
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            _useLoading.value = true;
+                            if (_useEmailRegisterFormKey.value.currentState!
+                                .validate()) {
+                              AuthStatus status =
+                                  await _useAuthServices.signUpWithEmail(
+                                      email: _useEmailTextController.text,
+                                      password:
+                                          _usePasswordTextController.text);
+
+                              // Checks error server side
+                              if (status != AuthStatus.successful) {
+                                CustomErrorDialog errorDialog =
+                                    CustomErrorDialog(context: context);
+                                await errorDialog.showError(status);
+                              } else {
+                                Navigator.of(context).popUntil(
+                                  ModalRoute.withName(
+                                      NavigationRoutes.blankRoute),
+                                );
+                              }
+                            }
+                            _useLoading.value = false;
+                          },
+                          child: _useLoading.value
+                              ? CircularProgressIndicator(
+                                  color: _useAppThemeState
+                                      ? CustomColors.canvasLight
+                                      : CustomColors.canvasDark,
+                                )
+                              : Text(
+                                  "SIGN UP",
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

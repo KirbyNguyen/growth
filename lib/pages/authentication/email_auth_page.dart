@@ -34,99 +34,110 @@ class EmailAuthPage extends HookWidget {
 
     final _useLoading = useState<bool>(false);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text("Email Sign-in"),
-      ),
-      body: Container(
-        decoration: AuthDecoration.authGradientBackground(_useAppThemeState),
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.05,
-          horizontal: MediaQuery.of(context).size.width * 0.10,
-        ),
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        "GROWTH",
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ),
-                  ),
-                  // Email authentication form
-                  Expanded(
-                    flex: 3,
-                    child: EmailAuthForm(
-                        useEmailFormKey: _useEmailAuthFormKey,
-                        useEmailTextController: _useEmailTextController,
-                        useAppThemeStateProvider: _useAppThemeState,
-                        usePasswordTextController: _usePasswordTextController),
-                  ),
-                  // Submit button
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.09,
-                        width: MediaQuery.of(context).size.width * 0.60,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            _useLoading.value = true;
-                            if (_useEmailAuthFormKey.value.currentState!
-                                .validate()) {
-                              AuthStatus status =
-                                  await _useAuthServices.signInWithEmail(
-                                      email: _useEmailTextController.text,
-                                      password:
-                                          _usePasswordTextController.text);
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
 
-                              // Checks error server side
-                              if (status != AuthStatus.successful) {
-                                CustomErrorDialog errorDialog =
-                                    CustomErrorDialog(context: context);
-                                await errorDialog.showError(status);
-                              } else {
-                                Navigator.of(context).popUntil(
-                                  ModalRoute.withName(
-                                      NavigationRoutes.blankRoute),
-                                );
-                              }
-                            }
-                            _useLoading.value = false;
-                          },
-                          child: _useLoading.value
-                              ? CircularProgressIndicator(
-                                  color: _useAppThemeState
-                                      ? CustomColors.canvasLight
-                                      : CustomColors.canvasDark,
-                                )
-                              : Text(
-                                  "SIGN IN",
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text("Email Sign-in"),
+        ),
+        body: Container(
+          decoration: AuthDecoration.authGradientBackground(_useAppThemeState),
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.05,
+            horizontal: MediaQuery.of(context).size.width * 0.10,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: Text(
+                          "GROWTH",
+                          style: Theme.of(context).textTheme.headline2,
                         ),
                       ),
                     ),
-                  ),
-                  // Register text
-                  const Flexible(
-                    flex: 1,
-                    child: RegisterText(),
-                  ),
-                ],
+                    // Email authentication form
+                    Expanded(
+                      flex: 3,
+                      child: EmailAuthForm(
+                          useEmailFormKey: _useEmailAuthFormKey,
+                          useEmailTextController: _useEmailTextController,
+                          useAppThemeStateProvider: _useAppThemeState,
+                          usePasswordTextController:
+                              _usePasswordTextController),
+                    ),
+                    // Submit button
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.09,
+                          width: MediaQuery.of(context).size.width * 0.60,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              _useLoading.value = true;
+                              if (_useEmailAuthFormKey.value.currentState!
+                                  .validate()) {
+                                AuthStatus status =
+                                    await _useAuthServices.signInWithEmail(
+                                        email: _useEmailTextController.text,
+                                        password:
+                                            _usePasswordTextController.text);
+
+                                // Checks error server side
+                                if (status != AuthStatus.successful) {
+                                  CustomErrorDialog errorDialog =
+                                      CustomErrorDialog(context: context);
+                                  await errorDialog.showError(status);
+                                } else {
+                                  Navigator.of(context).popUntil(
+                                    ModalRoute.withName(
+                                        NavigationRoutes.blankRoute),
+                                  );
+                                }
+                              }
+                              _useLoading.value = false;
+                            },
+                            child: _useLoading.value
+                                ? CircularProgressIndicator(
+                                    color: _useAppThemeState
+                                        ? CustomColors.canvasLight
+                                        : CustomColors.canvasDark,
+                                  )
+                                : Text(
+                                    "SIGN IN",
+                                    style:
+                                        Theme.of(context).textTheme.headline4,
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Register text
+                    const Flexible(
+                      flex: 1,
+                      child: RegisterText(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

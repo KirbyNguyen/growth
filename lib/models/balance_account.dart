@@ -2,7 +2,8 @@ class BalanceAccount {
   late String _id;
   late String _userId;
   late String _accountTypeId;
-  late String currency;
+  late String currencyFlag;
+  late String currencyCode;
   late String name;
   late double balance;
   late int colorValue;
@@ -13,7 +14,8 @@ class BalanceAccount {
     required String accountTypeId,
     required this.name,
     required this.balance,
-    required this.currency,
+    required this.currencyFlag,
+    required this.currencyCode,
     required this.colorValue,
   }) {
     _id = id;
