@@ -8,6 +8,7 @@ import 'package:growth/pages/authentication/reset_password_page.dart';
 import 'package:growth/pages/home_page.dart';
 
 import 'package:growth/pages/misc/terms_conditions_page.dart';
+
 /// [NavigationRoutes] provided routes' names for navigation through the app.
 class NavigationRoutes {
   static const String blankRoute = "/";
@@ -22,7 +23,8 @@ class NavigationRoutes {
 
   static const String balanceDetailsRoute = "/balance/details";
 
-  static const String balanceAccount = "/balance/account";
+  static const String balanceAccountCreate = "/balance/account/create";
+  static const String balanceAccountEdit = "/balance/account/edit";
 
   static const String gardenDetailsRoute = "/garden/details";
 

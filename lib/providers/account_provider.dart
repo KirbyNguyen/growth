@@ -22,9 +22,12 @@ class AccountRepository extends StateNotifier<List<BalanceAccount>> {
 
   /// Takes [String] as a userId to retrieve the list from the database, and
   /// sets it as a state
-  Future setList(String userId) async {
+  Future getList(String userId) async {
     List<BalanceAccount> list = await accountSQLite.getAll(userId);
-    state = list;
+    state = [
+      for (final item in list)
+        if (item.userId == userId) item,
+    ];
   }
 
   /// Takes [BalanceAccount], adds it to the database, then in the state.

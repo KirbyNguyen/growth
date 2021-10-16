@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:growth/constants/existing_type_list.dart';
-import 'package:growth/providers/firebase_auth_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:growth/components/account_card.dart';
 import 'package:growth/components/custom_scaffold.dart';
 
 import 'package:growth/constants/nav_routes.dart';
+import 'package:growth/constants/existing_type_list.dart';
 
 import 'package:growth/providers/account_provider.dart';
 import 'package:growth/providers/app_theme_provider.dart';
+import 'package:growth/providers/firebase_auth_provider.dart';
 
 class BalanceHomePage extends HookWidget {
   const BalanceHomePage({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class BalanceHomePage extends HookWidget {
     /// Build [List] of [Widget] to display a list of account
     List<Widget> _buildAccountCard() {
       List<Widget> list = [];
-      _useAccountListNotifer.setList(_authState.data!.value!.uid);
+      _useAccountListNotifer.getList(_authState.data!.value!.uid);
 
       for (final account in _useAccountList) {
         int iconPoint = ExistingTypeList.list
@@ -40,7 +40,7 @@ class BalanceHomePage extends HookWidget {
           AccountCard(
             colorValue: account.colorValue,
             function: () => Navigator.of(context).pushNamed(
-              NavigationRoutes.balanceAccount,
+              NavigationRoutes.balanceAccountEdit,
               arguments: account,
             ),
             data: Column(
@@ -86,7 +86,7 @@ class BalanceHomePage extends HookWidget {
       list.add(
         AccountCard.addCard(
           function: () => Navigator.of(context).pushNamed(
-            NavigationRoutes.balanceAccount,
+            NavigationRoutes.balanceAccountCreate,
           ),
           isDarkModeEnabled: _useAppThemeState,
         ),
