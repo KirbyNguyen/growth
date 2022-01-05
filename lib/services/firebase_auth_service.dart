@@ -41,10 +41,11 @@ class AuthenticationService {
     }
   }
 
-  Future<AuthStatus> signUpWithEmail(
-      {required String email,
-      required String password,
-      required String name}) async {
+  Future<AuthStatus> signUpWithEmail({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     try {
       UserCredential result =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -57,8 +58,8 @@ class AuthenticationService {
       await UserDataSerivce().updateGrowthUser(
         GrowthUser(
           uid: user.uid,
-          email: user.email!,
-          name: user.displayName!,
+          email: email,
+          name: name,
         ),
       );
 
