@@ -34,7 +34,7 @@ class UserDataSerivce {
     try {
       await growthUserCollection.doc(data.uid).set(data.toJson());
     } catch (error) {
-      // print("Error in updateGrowthUser()");
+      // print("Error in deleteGrowthUser()");
       // print(error);
 
       rethrow;

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:growth/constants/auth_status.dart';
+import 'package:growth/models/growth_user.dart';
+import 'package:growth/services/user_data_service.dart';
 
 /// [AuthenticationService] provides methods for authenticating through email,
 /// Google, and Apple.
@@ -50,7 +52,15 @@ class AuthenticationService {
         password: password,
       );
       User? user = result.user;
-      user!.updateDisplayName(name);
+      await user!.updateDisplayName(name);
+
+      await UserDataSerivce().updateGrowthUser(
+        GrowthUser(
+          uid: user.uid,
+          email: user.email!,
+          name: user.displayName!,
+        ),
+      );
 
       return AuthStatus.successful;
     } on FirebaseAuthException catch (authError) {
