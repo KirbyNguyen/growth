@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:growth/models/growth_user.dart';
 
-class UserDataSerivce {
+class UserDataSerivces {
   final CollectionReference growthUserCollection =
       FirebaseFirestore.instance.collection("GrowthUser");
 

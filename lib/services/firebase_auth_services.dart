@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:growth/constants/auth_status.dart';
 import 'package:growth/models/growth_user.dart';
-import 'package:growth/services/user_data_service.dart';
+import 'package:growth/services/user_data_services.dart';
 
-/// [AuthenticationService] provides methods for authenticating through email,
+/// [AuthenticationServices] provides methods for authenticating through email,
 /// Google, and Apple.
-class AuthenticationService {
+class AuthenticationServices {
   final FirebaseAuth _firebaseAuth;
-  AuthenticationService(this._firebaseAuth);
+  AuthenticationServices(this._firebaseAuth);
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
@@ -55,7 +55,7 @@ class AuthenticationService {
       User? user = result.user;
       await user!.updateDisplayName(name);
 
-      await UserDataSerivce().updateGrowthUser(
+      await UserDataSerivces().updateGrowthUser(
         GrowthUser(
           uid: user.uid,
           email: email,

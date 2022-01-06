@@ -61,8 +61,6 @@ dependencies:
   path: ^1.8.0
   sqflite: ^2.0.1
   path_provider: ^2.0.8
-  
-  google_fonts: ^2.2.0
 
   json_annotation: ^4.4.0
   freezed_annotation: ^1.1.0
@@ -110,23 +108,26 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Poppins
-  #     fonts:
-  #       - asset: assets/fonts/Poppins-Regular.ttf
-  #       - asset: assets/fonts/Poppins-Thin.ttf
-  #         weight: 100
-  #       - asset: assets/fonts/Poppins-ExtraLight.ttf
-  #         weight: 200
-  #       - asset: assets/fonts/Poppins-Light.ttf
-  #         weight: 300
-  #       - asset: assets/fonts/Poppins-Medium.ttf
-  #         weight: 500
-  #       - asset: assets/fonts/Poppins-Bold.ttf
-  #         weight: 700
-  #   - family: Righteous
-  #     fonts:
-  #       - asset: assets/fonts/Righteous-Regular.ttf
-  #
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/google_fonts/Poppins-Regular.ttf
+        - asset: assets/google_fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/google_fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/google_fonts/Poppins-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/google_fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/google_fonts/Poppins-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/google_fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/google_fonts/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
