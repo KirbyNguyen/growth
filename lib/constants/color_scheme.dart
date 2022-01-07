@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/custom_colors.dart';
 
+/// [CustomColorScheme] enum constants are used in [AppTheme]
 class CustomColorScheme {
   static const ColorScheme lightColorScheme = ColorScheme.light(
     primary: CustomColors.primaryLight,
