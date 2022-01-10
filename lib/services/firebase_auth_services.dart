@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:growth/constants/auth_status.dart';
+
 import 'package:growth/models/growth_user.dart';
+import 'package:growth/constants/auth_status.dart';
 import 'package:growth/services/user_data_services.dart';
 
 /// [AuthenticationServices] provides methods for authenticating through email,
