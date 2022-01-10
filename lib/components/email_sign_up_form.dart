@@ -21,7 +21,7 @@ class EmailSignUpForm extends HookConsumerWidget {
     final loading = useState<bool>(false);
     final passwordHidden = useState<bool>(true);
     final darkModeEnabled = ref.watch(appThemeStateProvider);
-    final authService = ref.watch(authServiceProvider);
+    final authService = ref.watch(authServicesProvider);
 
     final emailRegisterFormKey =
         useState<GlobalKey<FormState>>(GlobalKey<FormState>());
@@ -121,6 +121,7 @@ class EmailSignUpForm extends HookConsumerWidget {
                         ),
                   onPressed: () async {
                     loading.value = true;
+                    
                     if (emailRegisterFormKey.value.currentState!.validate()) {
                       AuthStatus status = await authService.signUpWithEmail(
                         email: emailTextController.text,
@@ -137,6 +138,7 @@ class EmailSignUpForm extends HookConsumerWidget {
                             .popUntil(ModalRoute.withName("/"));
                       }
                     }
+
                     loading.value = false;
                   },
                 ),

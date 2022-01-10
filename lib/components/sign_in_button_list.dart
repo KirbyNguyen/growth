@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/styles/auth_decoration.dart';
 import 'package:growth/providers/theme_provider.dart';
 
@@ -39,7 +40,8 @@ class SignInButtonList extends HookConsumerWidget {
                   ElevatedButton(
                     child: const Text("Sign in with Email"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed("/auth/signup");
+                      Navigator.of(context)
+                          .pushNamed(NavigationRoutes.authSignInRoute);
                     },
                   ),
                 ],

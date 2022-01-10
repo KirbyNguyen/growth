@@ -31,9 +31,9 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       title: "Growth",
-      routes: NavigatonRoutes.navRoutes,
+      routes: NavigationRoutes.navRoutes,
       theme: appTheme.getThemeData(context, darkModeEnabled),
-      initialRoute: "/auth/options",
+      initialRoute: "/",
     );
   }
 }

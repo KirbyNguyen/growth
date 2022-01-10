@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:growth/constants/nav_routes.dart';
 
 class TermsConditionsText extends StatelessWidget {
   const TermsConditionsText({
@@ -20,7 +21,7 @@ class TermsConditionsText extends StatelessWidget {
                 ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamed("/terms");
+            Navigator.of(context).pushNamed(NavigationRoutes.termsRoute);
           },
         ),
       ],
