@@ -7,6 +7,8 @@ class DatabaseNames {
   static String email = "email";
   static String typeID = "typeID";
   static String balance = "balance";
+  static String iconPoint = "iconPoint";
+  static String iconFamily = "iconFamily";
   static String subscribed = "subscribed";
   static String colorValue = "colorValue";
   static String currencyCode = "currencyCode";

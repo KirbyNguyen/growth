@@ -10,7 +10,7 @@ class AppWrapper extends HookConsumerWidget {
   const AppWrapper({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var authState = ref.read(authStateProvider);
+    var authState = ref.watch(authStateProvider.originProvider);
     return authState.when(
       data: (value) {
         if (value != null) {
