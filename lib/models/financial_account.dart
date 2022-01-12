@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'financial_account.freezed.dart';
+part 'financial_account.g.dart';
 
 @freezed
 class FinancialAccount with _$FinancialAccount {
@@ -15,4 +16,7 @@ class FinancialAccount with _$FinancialAccount {
     required String currencyCode,
     required int colorValue,
   }) = _FinancialAccount;
+
+  factory FinancialAccount.fromJson(Map<String, dynamic> json) =>
+      _$FinancialAccountFromJson(json);
 }

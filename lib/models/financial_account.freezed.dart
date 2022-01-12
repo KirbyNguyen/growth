@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+FinancialAccount _$FinancialAccountFromJson(Map<String, dynamic> json) {
+  return _FinancialAccount.fromJson(json);
+}
+
 /// @nodoc
 class _$FinancialAccountTearOff {
   const _$FinancialAccountTearOff();
@@ -36,6 +40,10 @@ class _$FinancialAccountTearOff {
       colorValue: colorValue,
     );
   }
+
+  FinancialAccount fromJson(Map<String, Object?> json) {
+    return FinancialAccount.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -51,6 +59,7 @@ mixin _$FinancialAccount {
   String get currencyCode => throw _privateConstructorUsedError;
   int get colorValue => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $FinancialAccountCopyWith<FinancialAccount> get copyWith =>
       throw _privateConstructorUsedError;
@@ -195,7 +204,7 @@ class __$FinancialAccountCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_FinancialAccount extends _FinancialAccount {
   const _$_FinancialAccount(
       {required this.id,
@@ -206,6 +215,9 @@ class _$_FinancialAccount extends _FinancialAccount {
       required this.currencyCode,
       required this.colorValue})
       : super._();
+
+  factory _$_FinancialAccount.fromJson(Map<String, dynamic> json) =>
+      _$$_FinancialAccountFromJson(json);
 
   @override
   final String id;
@@ -258,6 +270,11 @@ class _$_FinancialAccount extends _FinancialAccount {
   @override
   _$FinancialAccountCopyWith<_FinancialAccount> get copyWith =>
       __$FinancialAccountCopyWithImpl<_FinancialAccount>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FinancialAccountToJson(this);
+  }
 }
 
 abstract class _FinancialAccount extends FinancialAccount {
@@ -270,6 +287,9 @@ abstract class _FinancialAccount extends FinancialAccount {
       required String currencyCode,
       required int colorValue}) = _$_FinancialAccount;
   const _FinancialAccount._() : super._();
+
+  factory _FinancialAccount.fromJson(Map<String, dynamic> json) =
+      _$_FinancialAccount.fromJson;
 
   @override
   String get id;

@@ -12,4 +12,9 @@ class DatabaseNames {
   static String subscribed = "subscribed";
   static String colorValue = "colorValue";
   static String currencyCode = "currencyCode";
+
+  static String accountTable = "ACCOUNT_TABLE";
+  static String transactionTable = "Transaction_TABLE";
+
+  static String accountTypeID = "accountTypeID";
 }
