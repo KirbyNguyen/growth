@@ -15,6 +15,4 @@ class DatabaseNames {
 
   static String accountTable = "ACCOUNT_TABLE";
   static String transactionTable = "Transaction_TABLE";
-
-  static String accountTypeID = "accountTypeID";
 }

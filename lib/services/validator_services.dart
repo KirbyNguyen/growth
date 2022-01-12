@@ -1,13 +1,34 @@
 /// [ValidatorServices] provides functions to validate [TextFormField].
 class ValidatorServices {
-  /// Examines a [String] to see if it is a valid username.
-  static String? validateDisplayName(String? displayName) {
-    if (displayName!.isEmpty) {
-      return "Please enter a value for 'Username'.\n";
+  /// Examines a [String] to see if it is not empty.
+  static String? validateEmpty(String? field) {
+    if (field!.isEmpty) {
+      return "Please enter a value for this field.\n";
     } else {
       return null;
     }
   }
+
+  /// Examines a [String] to see if it is a numeric string.
+  static String? validateNumeric(String? field) {
+    if (field!.isEmpty) {
+      return "Please enter a value for this field.\n";
+    } else if (double.tryParse(field) == null) {
+      return "Please enter a numeric value.";
+    } else {
+      return null;
+    }
+  }
+
+  /// Examines a [String] to see if it is a valid username.
+  static String? validateDisplayName(String? displayName) {
+    if (displayName!.isEmpty) {
+      return "Please enter a value for 'Display Name'.\n";
+    } else {
+      return null;
+    }
+  }
+
 
   /// Examine a [String] to see if it is a valid email.
   static String? validateEmail(String? email) {

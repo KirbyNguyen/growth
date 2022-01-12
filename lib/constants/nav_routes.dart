@@ -24,7 +24,7 @@ class NavigationRoutes {
   static const String balanceDetailsRoute = "/balance/details";
 
   static const String balanceAccountCreate = "/balance/account/create";
-  static const String balanceAccountEdit = "/balance/account/edit";
+  static const String balanceAccountDetails = "/balance/account/details";
 
   static const String gardenDetailsRoute = "/garden/details";
 

@@ -37,7 +37,7 @@ class BalanceHomePage extends HookConsumerWidget {
           AccountCard(
             colorValue: account.colorValue,
             function: () => Navigator.of(context).pushNamed(
-              NavigationRoutes.balanceAccountEdit,
+              NavigationRoutes.balanceAccountDetails,
               arguments: account,
             ),
             data: Column(

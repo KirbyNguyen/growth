@@ -5,7 +5,7 @@ part 'account_type.g.dart';
 
 @freezed
 class AccountType with _$AccountType {
-  static String materialFamily = "materialFamily";
+  static String materialFamily = "MaterialIcons";
   const AccountType._(); // Added constructor
 
   const factory AccountType({

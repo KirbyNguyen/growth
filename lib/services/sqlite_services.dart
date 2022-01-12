@@ -37,7 +37,7 @@ class SQLiteServices {
       CREATE TABLE IF NOT EXISTS ${DatabaseNames.accountTable} ( 
         ${DatabaseNames.id} TEXT PRIMARY KEY NOT NULL, 
         ${DatabaseNames.uid} TEXT NOT NULL,
-        ${DatabaseNames.accountTypeID} TEXT NOT NULL,
+        ${DatabaseNames.typeID} TEXT NOT NULL,
         ${DatabaseNames.name} TEXT NOT NULL,
         ${DatabaseNames.balance} REAL NOT NULL,
         ${DatabaseNames.currencyCode} TEXT NOT NULL,

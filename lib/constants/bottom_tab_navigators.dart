@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/nav_routes.dart';
 
-import 'package:growth/pages/account/account_edit_page.dart';
+import 'package:growth/pages/account/account_details_page.dart';
 import 'package:growth/pages/account/account_create_page.dart';
 
 import 'package:growth/pages/balance/balance_home_page.dart';
@@ -31,8 +31,8 @@ class BottomTabNavigators {
             case NavigationRoutes.balanceAccountCreate:
               builder = (BuildContext context) => const AccountCreatePage();
               break;
-            case NavigationRoutes.balanceAccountEdit:
-              builder = (BuildContext context) => const AccountEditPage();
+            case NavigationRoutes.balanceAccountDetails:
+              builder = (BuildContext context) => const AccountDetailsPage();
               break;
 
             default:

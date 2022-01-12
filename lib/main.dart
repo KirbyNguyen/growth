@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:growth/constants/nav_routes.dart';
+import 'package:growth/services/sqlite_services.dart';
 
 import 'package:growth/providers/theme_provider.dart';
 import 'package:growth/providers/preferences_provider.dart';
@@ -11,7 +12,9 @@ import 'package:growth/providers/preferences_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp();
+  await SQLiteServices.instance.initDatabase();
 
   runApp(ProviderScope(
     overrides: [
@@ -23,7 +26,7 @@ Future<void> main() async {
 
 class MyApp extends HookConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = ref.watch(appThemeProvider);
