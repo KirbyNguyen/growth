@@ -1,17 +1,36 @@
-/// [ValidatorService] provides functions to validate [TextFormField].
-class ValidatorService {
-  /// Examines a [String] to see if it is a valid username.
-  /// Takes a [String] - username and returns a [String] - result.
-  static String? validateUsername(String? username) {
-    if (username!.isEmpty) {
-      return "Please enter a value for 'Username'.\n";
+/// [ValidatorServices] provides functions to validate [TextFormField].
+class ValidatorServices {
+  /// Examines a [String] to see if it is not empty.
+  static String? validateEmpty(String? field) {
+    if (field!.isEmpty) {
+      return "Please enter a value for this field.\n";
     } else {
       return null;
     }
   }
 
+  /// Examines a [String] to see if it is a numeric string.
+  static String? validateNumeric(String? field) {
+    if (field!.isEmpty) {
+      return "Please enter a value for this field.\n";
+    } else if (double.tryParse(field) == null) {
+      return "Please enter a numeric value.";
+    } else {
+      return null;
+    }
+  }
+
+  /// Examines a [String] to see if it is a valid username.
+  static String? validateDisplayName(String? displayName) {
+    if (displayName!.isEmpty) {
+      return "Please enter a value for 'Display Name'.\n";
+    } else {
+      return null;
+    }
+  }
+
+
   /// Examine a [String] to see if it is a valid email.
-  /// Takes a [String] - email and returns a [String] - result.
   static String? validateEmail(String? email) {
     // Email expression
     RegExp regex = RegExp(r'\w+@\w+\.\w+');
@@ -25,7 +44,6 @@ class ValidatorService {
   }
 
   /// Examine a [String] to see if it is a strong password
-  /// Takes a [String] - password and returns a [String] - result.
   static String? validatePassword(String? password) {
     // Uppercase expression
     RegExp hasUpper = RegExp(r'[A-Z]');
@@ -62,7 +80,6 @@ class ValidatorService {
   }
 
   /// Examine a [String] to see if it is the same as the password [String]
-  /// Takes two [String]s - confirmPassword and password and returns a [String] - result.
   static String? validateConfirmPassword(
       String? confirmPassword, String? password) {
     if (confirmPassword!.isEmpty) {

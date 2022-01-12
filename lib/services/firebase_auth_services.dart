@@ -1,15 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:growth/constants/auth_status.dart';
 
-/// [AuthenticationService] provides authentication through the whole app.
-class AuthenticationService {
+import 'package:growth/models/growth_user.dart';
+import 'package:growth/constants/auth_status.dart';
+import 'package:growth/services/user_data_services.dart';
+
+/// [AuthenticationServices] provides methods for authenticating through email,
+/// Google, and Apple.
+class AuthenticationServices {
   final FirebaseAuth _firebaseAuth;
-  AuthenticationService(this._firebaseAuth);
+  AuthenticationServices(this._firebaseAuth);
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
-  /// [signInWithEmail] takes a [String] - email and a [String] - password. It
-  /// returns an [AuthStatus] depending on the authentication.
   Future<AuthStatus> signInWithEmail(
       {required String email, required String password}) async {
     try {
@@ -40,15 +42,28 @@ class AuthenticationService {
     }
   }
 
-  /// [signUpWithEmail] takes a [String] - email and a [String] - password. It
-  /// returns an [AuthStatus] depending on the authentication.
-  Future<AuthStatus> signUpWithEmail(
-      {required String email, required String password}) async {
+  Future<AuthStatus> signUpWithEmail({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential result =
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      User? user = result.user;
+      await user!.updateDisplayName(name);
+
+      await UserDataSerivces().updateGrowthUser(
+        GrowthUser(
+          uid: user.uid,
+          email: email,
+          name: name,
+        ),
+      );
+
       return AuthStatus.successful;
     } on FirebaseAuthException catch (authError) {
       // print("Failed with error code: ${authError.code}");
@@ -72,7 +87,6 @@ class AuthenticationService {
     }
   }
 
-  /// [signOut] will log out the user and revoke any authentication.
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }

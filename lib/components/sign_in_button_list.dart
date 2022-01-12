@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-import 'package:growth/constants/custom_colors.dart';
-import 'package:growth/components/terms_text.dart';
+import 'package:growth/constants/nav_routes.dart';
 import 'package:growth/styles/auth_decoration.dart';
-import 'package:growth/providers/app_theme_provider.dart';
+import 'package:growth/providers/theme_provider.dart';
 
-/// [AuthOptionsLowerContainer] provides a list of authentication buttons with
+/// [SignInButtonList] provides a list of authentication buttons with
 /// Google, Apple, and Email.
-class AuthOptionsLowerContainer extends HookWidget {
-  const AuthOptionsLowerContainer({Key? key}) : super(key: key);
-
+class SignInButtonList extends HookConsumerWidget {
+  const SignInButtonList({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    final _useAppThemeStateProvider = useProvider(appThemeStateProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final darkModeEnabled = ref.read(appThemeStateProvider);
 
     return Expanded(
       flex: 4,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: AuthDecoration.lowerContainer(_useAppThemeStateProvider),
+        decoration: AuthDecoration.lowerContainer(darkModeEnabled),
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -33,38 +29,22 @@ class AuthOptionsLowerContainer extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  // Google Sign-in Button
-                  SignInButton(
-                    _useAppThemeStateProvider
-                        ? Buttons.GoogleDark
-                        : Buttons.Google,
+                  ElevatedButton(
+                    child: const Text("Sign in with Google"),
                     onPressed: () {},
                   ),
-                  // Apple Sign-in Button
-                  SignInButton(
-                    _useAppThemeStateProvider
-                        ? Buttons.AppleDark
-                        : Buttons.Apple,
+                  ElevatedButton(
+                    child: const Text("Sign in with Apple"),
                     onPressed: () {},
                   ),
-                  // Email Sign-in Button
-                  SignInButtonBuilder(
-                    text: "Sign in with Email",
-                    icon: Icons.email,
-                    backgroundColor: _useAppThemeStateProvider
-                        ? CustomColors.primaryDark
-                        : CustomColors.primaryLight,
+                  ElevatedButton(
+                    child: const Text("Sign in with Email"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed("/auth/email");
+                      Navigator.of(context)
+                          .pushNamed(NavigationRoutes.authSignInRoute);
                     },
                   ),
                 ],
-              ),
-            ),
-            const Expanded(
-              flex: 1,
-              child: TermsText(
-                flavorText: "By signing in, you agree with our",
               ),
             ),
           ],

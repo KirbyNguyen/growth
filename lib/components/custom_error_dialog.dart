@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:growth/constants/auth_status.dart';
 
-/// For displaying error diaglos
-/// Parameters: [BuildContext] - context
-/// Optional: [AuthStatus] - status and [String] - error
-/// Return: [AlertDialog]
+/// [CustomErrorDialog] displays the appropriate error messages based on
+/// [AuthStatus]
 class CustomErrorDialog {
   BuildContext context;
   CustomErrorDialog({required this.context});
 
-  /// Takes in [AuthStatus] and translates it into an appropriate [String].
   String parseAuthStatus(AuthStatus status) {
     switch (status) {
       case AuthStatus.successful:
@@ -30,7 +27,6 @@ class CustomErrorDialog {
     }
   }
 
-  /// Takes [AuthStatus] and display it as a [String] with an [AlertDialog].
   Future<dynamic> showError(AuthStatus status) {
     String errorText = parseAuthStatus(status);
 

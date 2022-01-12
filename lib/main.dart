@@ -1,39 +1,41 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:growth/constants/nav_routes.dart';
-import 'package:growth/providers/app_theme_provider.dart';
-import 'package:growth/providers/shared_preferences_provider.dart';
+import 'package:growth/services/sqlite_services.dart';
+
+import 'package:growth/providers/theme_provider.dart';
+import 'package:growth/providers/preferences_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp();
+  await SQLiteServices.instance.initDatabase();
 
   runApp(ProviderScope(
     overrides: [
-      // override the previous value with the new object
       sharedPreferencesProvider.overrideWithValue(sharedPreferences),
     ],
     child: const MyApp(),
   ));
 }
 
-class MyApp extends HookWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    final _useAppTheme = useProvider(appThemeProvider);
-    final _useAppThemeState = useProvider(appThemeStateProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appTheme = ref.watch(appThemeProvider);
+    final darkModeEnabled = ref.watch(appThemeStateProvider);
+
     return MaterialApp(
       title: "Growth",
-      theme: _useAppTheme.getThemeData(context, _useAppThemeState),
-      routes: NavigatonRoutes.navRoutes,
+      routes: NavigationRoutes.navRoutes,
+      theme: appTheme.getThemeData(context, darkModeEnabled),
       initialRoute: "/",
     );
   }
