@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'account_type.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_AccountType _$$_AccountTypeFromJson(Map<String, dynamic> json) =>
     _$_AccountType(
       id: json['id'] as String,
@@ -16,7 +17,6 @@ _$_AccountType _$$_AccountTypeFromJson(Map<String, dynamic> json) =>
       iconFamily: json['iconFamily'] as String,
     );
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_AccountTypeToJson(_$_AccountType instance) =>
     <String, dynamic>{
       'id': instance.id,

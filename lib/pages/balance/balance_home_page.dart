@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:growth/components/account_card.dart';
@@ -10,6 +11,7 @@ import 'package:growth/constants/existing_type_list.dart';
 import 'package:growth/providers/auth_provider.dart';
 import 'package:growth/providers/theme_provider.dart';
 import 'package:growth/providers/financial_account_provider.dart';
+import 'package:intl/intl.dart';
 
 class BalanceHomePage extends HookConsumerWidget {
   const BalanceHomePage({Key? key}) : super(key: key);
@@ -21,7 +23,10 @@ class BalanceHomePage extends HookConsumerWidget {
     final accountList = ref.watch(accountProvider);
     final accountListNotifer = ref.watch(accountProvider.notifier);
 
-    List<Widget> _buildAccountCards() {
+    final dateSelected = useState<DateTime>(DateTime.now());
+    final dateFormatter = useState<DateFormat>(DateFormat('yyyy-MM-dd'));
+
+    List<Widget> buildAccountCards() {
       List<Widget> list = [];
       accountListNotifer.initialize(user.value!.uid);
 
@@ -92,6 +97,17 @@ class BalanceHomePage extends HookConsumerWidget {
       return list;
     }
 
+    Future<void> selectTransactionDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: dateSelected.value,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101),
+      );
+      if (picked != null) dateSelected.value = picked;
+    }
+
     return CustomScaffold(
       title: "Balances",
       floatingActionButton: FloatingActionButton(
@@ -103,11 +119,58 @@ class BalanceHomePage extends HookConsumerWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: _buildAccountCards(),
+            children: buildAccountCards(),
           ),
         ),
         const Divider(),
-        const Text("Nothing is here"),
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    child: const Icon(Icons.arrow_back),
+                    onTap: () {
+                      dateSelected.value = DateTime(
+                        dateSelected.value.year,
+                        dateSelected.value.month,
+                        dateSelected.value.day - 1,
+                      );
+                    },
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      selectTransactionDate(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                      ),
+                      child: Text(
+                        dateFormatter.value.format(dateSelected.value) ==
+                                dateFormatter.value.format(DateTime.now())
+                            ? "Today"
+                            : dateFormatter.value.format(dateSelected.value),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    child: const Icon(Icons.arrow_forward),
+                    onTap: () {
+                      dateSelected.value = DateTime(
+                        dateSelected.value.year,
+                        dateSelected.value.month,
+                        dateSelected.value.day + 1,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
