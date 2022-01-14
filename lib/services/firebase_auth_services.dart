@@ -19,6 +19,7 @@ class AuthenticationServices {
         email: email,
         password: password,
       );
+      
       return AuthStatus.successful;
     } on FirebaseAuthException catch (authError) {
       // print("Failed with error code: ${authError.code}");
@@ -56,6 +57,8 @@ class AuthenticationServices {
       User? user = result.user;
       await user!.updateDisplayName(name);
 
+      await user.sendEmailVerification();
+
       await UserDataSerivces().updateGrowthUser(
         GrowthUser(
           uid: user.uid,
@@ -85,6 +88,10 @@ class AuthenticationServices {
 
       return AuthStatus.undefined;
     }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   Future<void> signOut() async {

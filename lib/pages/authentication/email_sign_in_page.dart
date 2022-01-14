@@ -35,7 +35,7 @@ class EmailSignInPage extends HookConsumerWidget {
           child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
-                hasScrollBody: false,
+                hasScrollBody: true,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[

@@ -35,7 +35,7 @@ class EmailSignUpPage extends HookConsumerWidget {
           child: const CustomScrollView(
             slivers: [
               SliverFillRemaining(
-                hasScrollBody: false,
+                hasScrollBody: true,
                 child: EmailSignUpForm(),
               ),
             ],
