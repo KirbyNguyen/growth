@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'transaction.dart';
+part of 'financial_transaction.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,32 +14,28 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Transaction _$TransactionFromJson(Map<String, dynamic> json) {
-  return _Transaction.fromJson(json);
+FinancialTransaction _$FinancialTransactionFromJson(Map<String, dynamic> json) {
+  return _FinancialTransaction.fromJson(json);
 }
 
 /// @nodoc
-class _$TransactionTearOff {
-  const _$TransactionTearOff();
+class _$FinancialTransactionTearOff {
+  const _$FinancialTransactionTearOff();
 
-  _Transaction call(
+  _FinancialTransaction call(
       {required String id,
       required String uid,
-      required String typeID,
       required String accountID,
       required String note,
-      required String name,
       required String method,
       required DateTime date,
       required DateTime dateCreated,
       required DateTime dateEdited}) {
-    return _Transaction(
+    return _FinancialTransaction(
       id: id,
       uid: uid,
-      typeID: typeID,
       accountID: accountID,
       note: note,
-      name: name,
       method: method,
       date: date,
       dateCreated: dateCreated,
@@ -47,22 +43,20 @@ class _$TransactionTearOff {
     );
   }
 
-  Transaction fromJson(Map<String, Object?> json) {
-    return Transaction.fromJson(json);
+  FinancialTransaction fromJson(Map<String, Object?> json) {
+    return FinancialTransaction.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Transaction = _$TransactionTearOff();
+const $FinancialTransaction = _$FinancialTransactionTearOff();
 
 /// @nodoc
-mixin _$Transaction {
+mixin _$FinancialTransaction {
   String get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  String get typeID => throw _privateConstructorUsedError;
   String get accountID => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
   String get method => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   DateTime get dateCreated => throw _privateConstructorUsedError;
@@ -70,22 +64,20 @@ mixin _$Transaction {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TransactionCopyWith<Transaction> get copyWith =>
+  $FinancialTransactionCopyWith<FinancialTransaction> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TransactionCopyWith<$Res> {
-  factory $TransactionCopyWith(
-          Transaction value, $Res Function(Transaction) then) =
-      _$TransactionCopyWithImpl<$Res>;
+abstract class $FinancialTransactionCopyWith<$Res> {
+  factory $FinancialTransactionCopyWith(FinancialTransaction value,
+          $Res Function(FinancialTransaction) then) =
+      _$FinancialTransactionCopyWithImpl<$Res>;
   $Res call(
       {String id,
       String uid,
-      String typeID,
       String accountID,
       String note,
-      String name,
       String method,
       DateTime date,
       DateTime dateCreated,
@@ -93,21 +85,20 @@ abstract class $TransactionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
-  _$TransactionCopyWithImpl(this._value, this._then);
+class _$FinancialTransactionCopyWithImpl<$Res>
+    implements $FinancialTransactionCopyWith<$Res> {
+  _$FinancialTransactionCopyWithImpl(this._value, this._then);
 
-  final Transaction _value;
+  final FinancialTransaction _value;
   // ignore: unused_field
-  final $Res Function(Transaction) _then;
+  final $Res Function(FinancialTransaction) _then;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? uid = freezed,
-    Object? typeID = freezed,
     Object? accountID = freezed,
     Object? note = freezed,
-    Object? name = freezed,
     Object? method = freezed,
     Object? date = freezed,
     Object? dateCreated = freezed,
@@ -122,10 +113,6 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      typeID: typeID == freezed
-          ? _value.typeID
-          : typeID // ignore: cast_nullable_to_non_nullable
-              as String,
       accountID: accountID == freezed
           ? _value.accountID
           : accountID // ignore: cast_nullable_to_non_nullable
@@ -133,10 +120,6 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       note: note == freezed
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
       method: method == freezed
           ? _value.method
@@ -159,19 +142,17 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TransactionCopyWith<$Res>
-    implements $TransactionCopyWith<$Res> {
-  factory _$TransactionCopyWith(
-          _Transaction value, $Res Function(_Transaction) then) =
-      __$TransactionCopyWithImpl<$Res>;
+abstract class _$FinancialTransactionCopyWith<$Res>
+    implements $FinancialTransactionCopyWith<$Res> {
+  factory _$FinancialTransactionCopyWith(_FinancialTransaction value,
+          $Res Function(_FinancialTransaction) then) =
+      __$FinancialTransactionCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
       String uid,
-      String typeID,
       String accountID,
       String note,
-      String name,
       String method,
       DateTime date,
       DateTime dateCreated,
@@ -179,29 +160,28 @@ abstract class _$TransactionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
-    implements _$TransactionCopyWith<$Res> {
-  __$TransactionCopyWithImpl(
-      _Transaction _value, $Res Function(_Transaction) _then)
-      : super(_value, (v) => _then(v as _Transaction));
+class __$FinancialTransactionCopyWithImpl<$Res>
+    extends _$FinancialTransactionCopyWithImpl<$Res>
+    implements _$FinancialTransactionCopyWith<$Res> {
+  __$FinancialTransactionCopyWithImpl(
+      _FinancialTransaction _value, $Res Function(_FinancialTransaction) _then)
+      : super(_value, (v) => _then(v as _FinancialTransaction));
 
   @override
-  _Transaction get _value => super._value as _Transaction;
+  _FinancialTransaction get _value => super._value as _FinancialTransaction;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? uid = freezed,
-    Object? typeID = freezed,
     Object? accountID = freezed,
     Object? note = freezed,
-    Object? name = freezed,
     Object? method = freezed,
     Object? date = freezed,
     Object? dateCreated = freezed,
     Object? dateEdited = freezed,
   }) {
-    return _then(_Transaction(
+    return _then(_FinancialTransaction(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -210,10 +190,6 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      typeID: typeID == freezed
-          ? _value.typeID
-          : typeID // ignore: cast_nullable_to_non_nullable
-              as String,
       accountID: accountID == freezed
           ? _value.accountID
           : accountID // ignore: cast_nullable_to_non_nullable
@@ -221,10 +197,6 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
       note: note == freezed
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
       method: method == freezed
           ? _value.method
@@ -248,35 +220,29 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Transaction extends _Transaction {
-  const _$_Transaction(
+class _$_FinancialTransaction extends _FinancialTransaction {
+  const _$_FinancialTransaction(
       {required this.id,
       required this.uid,
-      required this.typeID,
       required this.accountID,
       required this.note,
-      required this.name,
       required this.method,
       required this.date,
       required this.dateCreated,
       required this.dateEdited})
       : super._();
 
-  factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionFromJson(json);
+  factory _$_FinancialTransaction.fromJson(Map<String, dynamic> json) =>
+      _$$_FinancialTransactionFromJson(json);
 
   @override
   final String id;
   @override
   final String uid;
   @override
-  final String typeID;
-  @override
   final String accountID;
   @override
   final String note;
-  @override
-  final String name;
   @override
   final String method;
   @override
@@ -288,20 +254,18 @@ class _$_Transaction extends _Transaction {
 
   @override
   String toString() {
-    return 'Transaction(id: $id, uid: $uid, typeID: $typeID, accountID: $accountID, note: $note, name: $name, method: $method, date: $date, dateCreated: $dateCreated, dateEdited: $dateEdited)';
+    return 'FinancialTransaction(id: $id, uid: $uid, accountID: $accountID, note: $note, method: $method, date: $date, dateCreated: $dateCreated, dateEdited: $dateEdited)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Transaction &&
+            other is _FinancialTransaction &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality().equals(other.typeID, typeID) &&
             const DeepCollectionEquality().equals(other.accountID, accountID) &&
             const DeepCollectionEquality().equals(other.note, note) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.method, method) &&
             const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality()
@@ -315,10 +279,8 @@ class _$_Transaction extends _Transaction {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(uid),
-      const DeepCollectionEquality().hash(typeID),
       const DeepCollectionEquality().hash(accountID),
       const DeepCollectionEquality().hash(note),
-      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(method),
       const DeepCollectionEquality().hash(date),
       const DeepCollectionEquality().hash(dateCreated),
@@ -326,44 +288,39 @@ class _$_Transaction extends _Transaction {
 
   @JsonKey(ignore: true)
   @override
-  _$TransactionCopyWith<_Transaction> get copyWith =>
-      __$TransactionCopyWithImpl<_Transaction>(this, _$identity);
+  _$FinancialTransactionCopyWith<_FinancialTransaction> get copyWith =>
+      __$FinancialTransactionCopyWithImpl<_FinancialTransaction>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionToJson(this);
+    return _$$_FinancialTransactionToJson(this);
   }
 }
 
-abstract class _Transaction extends Transaction {
-  const factory _Transaction(
+abstract class _FinancialTransaction extends FinancialTransaction {
+  const factory _FinancialTransaction(
       {required String id,
       required String uid,
-      required String typeID,
       required String accountID,
       required String note,
-      required String name,
       required String method,
       required DateTime date,
       required DateTime dateCreated,
-      required DateTime dateEdited}) = _$_Transaction;
-  const _Transaction._() : super._();
+      required DateTime dateEdited}) = _$_FinancialTransaction;
+  const _FinancialTransaction._() : super._();
 
-  factory _Transaction.fromJson(Map<String, dynamic> json) =
-      _$_Transaction.fromJson;
+  factory _FinancialTransaction.fromJson(Map<String, dynamic> json) =
+      _$_FinancialTransaction.fromJson;
 
   @override
   String get id;
   @override
   String get uid;
   @override
-  String get typeID;
-  @override
   String get accountID;
   @override
   String get note;
-  @override
-  String get name;
   @override
   String get method;
   @override
@@ -374,6 +331,6 @@ abstract class _Transaction extends Transaction {
   DateTime get dateEdited;
   @override
   @JsonKey(ignore: true)
-  _$TransactionCopyWith<_Transaction> get copyWith =>
+  _$FinancialTransactionCopyWith<_FinancialTransaction> get copyWith =>
       throw _privateConstructorUsedError;
 }

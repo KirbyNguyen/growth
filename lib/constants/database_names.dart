@@ -5,7 +5,9 @@ class DatabaseNames {
   static String coin = "coin";
   static String name = "name";
   static String date = "date";
+  static String note = "note";
   static String email = "email";
+  static String method = "method";
   static String typeID = "typeID";
   static String balance = "balance";
   static String accountID = "accountID";

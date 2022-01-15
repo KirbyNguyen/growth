@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,7 +12,6 @@ import 'package:growth/constants/existing_type_list.dart';
 import 'package:growth/providers/auth_provider.dart';
 import 'package:growth/providers/theme_provider.dart';
 import 'package:growth/providers/financial_account_provider.dart';
-import 'package:intl/intl.dart';
 
 class BalanceHomePage extends HookConsumerWidget {
   const BalanceHomePage({Key? key}) : super(key: key);
@@ -112,7 +112,10 @@ class BalanceHomePage extends HookConsumerWidget {
       title: "Balances",
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed(NavigationRoutes.balanceTransactionCreate);
+        },
       ),
       actions: const [],
       children: [

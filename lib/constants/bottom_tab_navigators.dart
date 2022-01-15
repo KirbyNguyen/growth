@@ -11,6 +11,8 @@ import 'package:growth/pages/garden/garden_details_page.dart';
 import 'package:growth/pages/garden/garden_home_page.dart';
 
 import 'package:growth/pages/settings/settings_home_page.dart';
+import 'package:growth/pages/transaction/transaction_create_page.dart';
+import 'package:growth/pages/transaction/transaction_details_page.dart';
 
 /// [BottomTabNavigators] contain [Navigator] for [BottomNavigationBar]
 class BottomTabNavigators {
@@ -34,7 +36,13 @@ class BottomTabNavigators {
             case NavigationRoutes.balanceAccountDetails:
               builder = (BuildContext context) => const AccountDetailsPage();
               break;
-
+            case NavigationRoutes.balanceTransactionCreate:
+              builder = (BuildContext context) => const TransactionCreatePage();
+              break;
+            case NavigationRoutes.balanceTransactionDetails:
+              builder =
+                  (BuildContext context) => const TransactionDetailsPage();
+              break;
             default:
               throw Exception("Invalid route: ${settings.name}");
           }

@@ -1,6 +1,7 @@
 import 'package:growth/constants/database_names.dart';
 import 'package:growth/databases/db_helper.dart';
 import 'package:growth/models/financial_account.dart';
+import 'package:growth/models/financial_transaction.dart';
 import 'package:growth/services/sqlite_services.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -61,6 +62,60 @@ class SQLiteDatabase extends DBHelper {
   Future<int> deleteAccount(String id) async {
     return await _db!.delete(
       DatabaseNames.accountTable,
+      where: "${DatabaseNames.id} = ?",
+      whereArgs: [id],
+    );
+  }
+
+    /* ========================================================
+  Financial Transaction Database SQLite Functions
+  ======================================================== */
+
+  @override
+  Future<List<FinancialTransaction>> getAllTransactions(String uid) async {
+      final dataList = await _db!.query(
+      DatabaseNames.transactionTable,
+      where: "${DatabaseNames.uid} = ?",
+      whereArgs: [uid],
+    );
+
+    if (dataList.isEmpty) return [];
+    return dataList.map((data) => FinancialTransaction.fromJson(data)).toList();
+  }
+
+  @override
+  Future<FinancialTransaction> getOneTransaction(String id) async {
+        final dataList = await _db!.query(
+      DatabaseNames.transactionTable,
+      where: "${DatabaseNames.id} = ?",
+      whereArgs: [id],
+    );
+
+    return FinancialTransaction.fromJson(dataList[0]);
+  }
+
+  @override
+  Future insertTransaction(FinancialTransaction transaction) async {
+    return await _db!.insert(
+      DatabaseNames.accountTable,
+      transaction.toJson(),
+    );
+  }
+
+  @override
+  Future updateTransaction(FinancialTransaction transaction) async {
+    return await _db!.update(
+      DatabaseNames.transactionTable,
+      transaction.toJson(),
+      where: "${DatabaseNames.id} = ?",
+      whereArgs: [transaction.id],
+    );
+  }
+
+  @override
+  Future deleteTransaction(String id) async {
+    return await _db!.delete(
+      DatabaseNames.transactionTable,
       where: "${DatabaseNames.id} = ?",
       whereArgs: [id],
     );

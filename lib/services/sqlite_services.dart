@@ -44,5 +44,17 @@ class SQLiteServices {
         ${DatabaseNames.colorValue} INT NOT NULL
       );
       ''');
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS ${DatabaseNames.transactionTable} ( 
+        ${DatabaseNames.id} TEXT PRIMARY KEY NOT NULL, 
+        ${DatabaseNames.uid} TEXT NOT NULL,
+        FOREIGN KEY(${DatabaseNames.accountID}) REFERENCES ${DatabaseNames.accountTable}(${DatabaseNames.id}),
+        ${DatabaseNames.note} TEXT,
+        ${DatabaseNames.date} TEXT NOT NULL,
+        ${DatabaseNames.method} TEXT NOT NULL,
+        ${DatabaseNames.dateEdited} TEXT NOT NULL,
+        ${DatabaseNames.dateCreated} TEXT NOT NULL
+      );
+      ''');
   }
 }
