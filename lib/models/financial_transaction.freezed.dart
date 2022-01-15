@@ -27,7 +27,9 @@ class _$FinancialTransactionTearOff {
       required String uid,
       required String accountID,
       required String note,
+      required bool expense,
       required String method,
+      required double amount,
       required DateTime date,
       required DateTime dateCreated,
       required DateTime dateEdited}) {
@@ -36,7 +38,9 @@ class _$FinancialTransactionTearOff {
       uid: uid,
       accountID: accountID,
       note: note,
+      expense: expense,
       method: method,
+      amount: amount,
       date: date,
       dateCreated: dateCreated,
       dateEdited: dateEdited,
@@ -57,7 +61,9 @@ mixin _$FinancialTransaction {
   String get uid => throw _privateConstructorUsedError;
   String get accountID => throw _privateConstructorUsedError;
   String get note => throw _privateConstructorUsedError;
+  bool get expense => throw _privateConstructorUsedError;
   String get method => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   DateTime get dateCreated => throw _privateConstructorUsedError;
   DateTime get dateEdited => throw _privateConstructorUsedError;
@@ -78,7 +84,9 @@ abstract class $FinancialTransactionCopyWith<$Res> {
       String uid,
       String accountID,
       String note,
+      bool expense,
       String method,
+      double amount,
       DateTime date,
       DateTime dateCreated,
       DateTime dateEdited});
@@ -99,7 +107,9 @@ class _$FinancialTransactionCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? accountID = freezed,
     Object? note = freezed,
+    Object? expense = freezed,
     Object? method = freezed,
+    Object? amount = freezed,
     Object? date = freezed,
     Object? dateCreated = freezed,
     Object? dateEdited = freezed,
@@ -121,10 +131,18 @@ class _$FinancialTransactionCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
+      expense: expense == freezed
+          ? _value.expense
+          : expense // ignore: cast_nullable_to_non_nullable
+              as bool,
       method: method == freezed
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
       date: date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -153,7 +171,9 @@ abstract class _$FinancialTransactionCopyWith<$Res>
       String uid,
       String accountID,
       String note,
+      bool expense,
       String method,
+      double amount,
       DateTime date,
       DateTime dateCreated,
       DateTime dateEdited});
@@ -176,7 +196,9 @@ class __$FinancialTransactionCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? accountID = freezed,
     Object? note = freezed,
+    Object? expense = freezed,
     Object? method = freezed,
+    Object? amount = freezed,
     Object? date = freezed,
     Object? dateCreated = freezed,
     Object? dateEdited = freezed,
@@ -198,10 +220,18 @@ class __$FinancialTransactionCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
+      expense: expense == freezed
+          ? _value.expense
+          : expense // ignore: cast_nullable_to_non_nullable
+              as bool,
       method: method == freezed
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
       date: date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -226,7 +256,9 @@ class _$_FinancialTransaction extends _FinancialTransaction {
       required this.uid,
       required this.accountID,
       required this.note,
+      required this.expense,
       required this.method,
+      required this.amount,
       required this.date,
       required this.dateCreated,
       required this.dateEdited})
@@ -244,7 +276,11 @@ class _$_FinancialTransaction extends _FinancialTransaction {
   @override
   final String note;
   @override
+  final bool expense;
+  @override
   final String method;
+  @override
+  final double amount;
   @override
   final DateTime date;
   @override
@@ -254,7 +290,7 @@ class _$_FinancialTransaction extends _FinancialTransaction {
 
   @override
   String toString() {
-    return 'FinancialTransaction(id: $id, uid: $uid, accountID: $accountID, note: $note, method: $method, date: $date, dateCreated: $dateCreated, dateEdited: $dateEdited)';
+    return 'FinancialTransaction(id: $id, uid: $uid, accountID: $accountID, note: $note, expense: $expense, method: $method, amount: $amount, date: $date, dateCreated: $dateCreated, dateEdited: $dateEdited)';
   }
 
   @override
@@ -266,7 +302,9 @@ class _$_FinancialTransaction extends _FinancialTransaction {
             const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality().equals(other.accountID, accountID) &&
             const DeepCollectionEquality().equals(other.note, note) &&
+            const DeepCollectionEquality().equals(other.expense, expense) &&
             const DeepCollectionEquality().equals(other.method, method) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
             const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality()
                 .equals(other.dateCreated, dateCreated) &&
@@ -281,7 +319,9 @@ class _$_FinancialTransaction extends _FinancialTransaction {
       const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(accountID),
       const DeepCollectionEquality().hash(note),
+      const DeepCollectionEquality().hash(expense),
       const DeepCollectionEquality().hash(method),
+      const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(date),
       const DeepCollectionEquality().hash(dateCreated),
       const DeepCollectionEquality().hash(dateEdited));
@@ -304,7 +344,9 @@ abstract class _FinancialTransaction extends FinancialTransaction {
       required String uid,
       required String accountID,
       required String note,
+      required bool expense,
       required String method,
+      required double amount,
       required DateTime date,
       required DateTime dateCreated,
       required DateTime dateEdited}) = _$_FinancialTransaction;
@@ -322,7 +364,11 @@ abstract class _FinancialTransaction extends FinancialTransaction {
   @override
   String get note;
   @override
+  bool get expense;
+  @override
   String get method;
+  @override
+  double get amount;
   @override
   DateTime get date;
   @override

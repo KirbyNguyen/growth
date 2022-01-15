@@ -12,6 +12,7 @@ import 'package:growth/models/account_type.dart';
 import 'package:growth/models/financial_account.dart';
 
 import 'package:growth/providers/theme_provider.dart';
+import 'package:growth/providers/financial_account_provider.dart';
 import 'package:growth/providers/financial_transaction_provider.dart';
 
 import 'package:growth/components/account_modal.dart';
@@ -22,7 +23,9 @@ class TransactionCreatePage extends HookConsumerWidget {
   const TransactionCreatePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final accountList = ref.watch(accountProvider);
     final darkModeEnabled = ref.watch(appThemeStateProvider);
+    final accountListNotifer = ref.watch(accountProvider.notifier);
     final transactionListNotifer = ref.watch(transactionProvider.notifier);
 
     final expense = useState<bool>(true);
@@ -276,6 +279,8 @@ class TransactionCreatePage extends HookConsumerWidget {
                                 id: const Uuid().v4(),
                                 uid: account.value!.uid,
                                 accountID: account.value!.id,
+                                expense: expense.value,
+                                amount: double.parse(amountTextController.text),
                                 note: noteTextController.text,
                                 method: methodTextController.text,
                                 date: DateTime(
@@ -288,8 +293,23 @@ class TransactionCreatePage extends HookConsumerWidget {
                                 dateCreated: DateTime.now(),
                                 dateEdited: DateTime.now(),
                               );
+
+                              FinancialAccount newAccount =
+                                  accountList.firstWhere((element) =>
+                                      element.id == transaction.accountID);
+
+                              if (expense.value) {
+                                newAccount = newAccount.copyWith(
+                                    balance: newAccount.balance -
+                                        transaction.amount);
+                              } else {
+                                newAccount = newAccount.copyWith(
+                                    balance: newAccount.balance +
+                                        transaction.amount);
+                              }
                               try {
                                 await transactionListNotifer.add(transaction);
+                                await accountListNotifer.update(newAccount);
                                 Navigator.of(context).pop();
                               } catch (error) {
                                 // print(error);

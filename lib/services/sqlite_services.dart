@@ -52,6 +52,8 @@ class SQLiteServices {
         ${DatabaseNames.note} TEXT,
         ${DatabaseNames.date} TEXT NOT NULL,
         ${DatabaseNames.method} TEXT NOT NULL,
+        ${DatabaseNames.amount} REAL NOT NULL,
+        ${DatabaseNames.expense} BOOLEAN NOT NULL,
         ${DatabaseNames.dateEdited} TEXT NOT NULL,
         ${DatabaseNames.dateCreated} TEXT NOT NULL
       );

@@ -8,8 +8,10 @@ class DatabaseNames {
   static String note = "note";
   static String email = "email";
   static String method = "method";
+  static String amount = "amount";
   static String typeID = "typeID";
   static String balance = "balance";
+  static String expense = "expense";
   static String accountID = "accountID";
   static String iconPoint = "iconPoint";
   static String iconFamily = "iconFamily";
